@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pharma/config/router.dart';
-import 'package:stock_pharma/screens/dashboards/dashboard_user.dart';
-import 'package:stock_pharma/screens/forms/signup.dart';
+import 'package:stock_pharma/screens/screens.dart';
+import 'package:stock_pharma/screens/screens.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,8 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF00A34D),
       ),
-      onGenerateRoute: AppRouter.onGeneratedRoute,
-      initialRoute: SignUp.routeNameS,
+      home:SignUp(),
     );
   }
 }

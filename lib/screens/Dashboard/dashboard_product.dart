@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pharma/screens/screens.dart';
+import 'package:stock_pharma/screens/Forms/add_group_product.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
-class DashUserProduct extends StatefulWidget {
-  static const String routeName = '/DashUserProduct';
-  const DashUserProduct({Key? key}) : super(key: key);
-
-  static Route route() {
-    return MaterialPageRoute(
-        settings: RouteSettings(name: routeName),
-        builder: (context) => DashUserProduct());
-  }
+class DashboardProduct extends StatefulWidget {
+  const DashboardProduct({Key? key}) : super(key: key);
 
   @override
-  State<DashUserProduct> createState() => _DashUserProductState();
+  State<DashboardProduct> createState() => _DashboardProductState();
 }
 
-class _DashUserProductState extends State<DashUserProduct> {
+class _DashboardProductState extends State<DashboardProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +27,7 @@ class _DashUserProductState extends State<DashUserProduct> {
               Row(
                 children: [
                   dashProductTile(text: 'Comprimés'),
-                   dashProductTile(text: 'Pommades'),
+                  dashProductTile(text: 'Pommades'),
                 ],
               ),
               Row(
@@ -55,25 +48,13 @@ class _DashUserProductState extends State<DashUserProduct> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          openDialog();
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddGroupProduct(),
+          ));
           //Navigator.pushNamed(context, AddGroupProducts.routeName);
         },
         backgroundColor: Color(0xFF0C8E36),
         child: Icon(Icons.add),
       ),
     );
-  }
-
-  Future openDialog() {
-    return showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text('Ajouter un groupe de produit'),
-              content: ListView(
-                children: [
-                  TextFormField(),
-                ],
-              ),
-            ));
   }
 }

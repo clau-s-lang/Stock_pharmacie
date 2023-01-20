@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Padding employTextField({
+Padding encoloredTextField({
   controller,
   maxLines,
   String? label,
@@ -32,7 +32,7 @@ Padding employTextField({
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-                color: Colors.green, style: BorderStyle.solid, width: 1.0),
+                color: Colors.green, style: BorderStyle.solid, width: 0.1),
           ),
         ),
         textCapitalization: TextCapitalization.sentences,

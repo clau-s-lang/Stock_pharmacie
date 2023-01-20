@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:stock_pharma/screens/Dashboard/dashboard_product.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
 class DashboardUser extends StatefulWidget {
-  static const String routeName = '/DashboardUser';
   const DashboardUser({Key? key}) : super(key: key);
-  static Route route() {
-    return  MaterialPageRoute(
-        settings: RouteSettings(name: routeName),
-        builder: (context) => DashboardUser());
-  }
+
   @override
   State<DashboardUser> createState() => _DashboardUserState();
 }
+
 class _DashboardUserState extends State<DashboardUser> {
   @override
   Widget build(BuildContext context) {
@@ -28,15 +25,17 @@ class _DashboardUserState extends State<DashboardUser> {
               Row(
                 children: [
                   dashUserTile(
-                    text: 'Produits',
-                    routing: Navigator.pushNamed(context, DashUserProduct.routeName)
-                  ),
-                 /* dashUserTile(
+                      text: 'Produits',
+                      //routing: Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardProduct(),
+                      //))
+    ),
+                  //Navigator.pushNamed(context, DashUserProduct.routeName)
+                  dashUserTile(
                     text: 'Ventes',
-                  ),*/
+                  ),
                 ],
               ),
-             /* Row(
+              Row(
                 children: [
                   dashUserTile(
                     text: 'Dettes client',
@@ -55,12 +54,20 @@ class _DashboardUserState extends State<DashboardUser> {
                     text: 'Ventes',
                   ),
                 ],
-              ),*/
+              ),
             ],
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: Color(0xFF0C8E36),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardProduct(),
+          ));
+        },
+        //Icon(Icons.add),
+      ),
     );
   }
 }
-
