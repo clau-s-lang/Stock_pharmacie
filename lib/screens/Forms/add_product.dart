@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pharma/screens/Dashboard/edit_product.dart';
+import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
 class AddProducts extends StatefulWidget {
@@ -134,7 +135,7 @@ class _AddProductsState extends State<AddProducts> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProducts()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardUser()));
         },
         child: Icon(Icons.check),
         backgroundColor:Color(0xFF0C8E36) ,

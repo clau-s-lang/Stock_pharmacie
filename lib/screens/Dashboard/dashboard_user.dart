@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pharma/screens/Dashboard/dashboard_product.dart';
+import 'package:stock_pharma/screens/Rapport/Dash_Rapport.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
@@ -24,21 +25,78 @@ class _DashboardUserState extends State<DashboardUser> {
             children: [
               Row(
                 children: [
-                  dashUserTile(
-                      text: 'Produits',
-                      //routing: Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardProduct(),
-                      //))
-    ),
-                  //Navigator.pushNamed(context, DashUserProduct.routeName)
-                  dashUserTile(
-                    text: 'Ventes',
+                  GestureDetector(
+                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardProduct(),
+                    ));},
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      width: 180,
+                      height: 155,
+                      child: Card(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 100,
+                              //width: 50,
+                              child: Image(
+                                image: AssetImage('images/medoc.png'),
+                              ),
+                            ),
+                            Container(height:20,child: Center(child: Text('Produits'))),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>AddProducts(),
+                    ));},
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      width: 180,
+                      height: 155,
+                      child: Card(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 100,
+                              //width: 50,
+                              child: Image(
+                                image: AssetImage('images/medoc.png'),
+                              ),
+                            ),
+                            Container(height:20,child: Center(child: Text('Approvissionnement'))),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
               Row(
                 children: [
-                  dashUserTile(
-                    text: 'Dettes client',
+                  GestureDetector(
+                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsParGroupe(),
+                    ));},
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      width: 180,
+                      height: 155,
+                      child: Card(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 100,
+                              //width: 50,
+                              child: Image(
+                                image: AssetImage('images/medoc.png'),
+                              ),
+                            ),
+                            Container(height:20,child: Center(child: Text('Stock'))),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                   dashUserTile(
                     text: 'Occasionnelles',
@@ -59,7 +117,7 @@ class _DashboardUserState extends State<DashboardUser> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Color(0xFF0C8E36),
         onPressed: () {
@@ -67,7 +125,7 @@ class _DashboardUserState extends State<DashboardUser> {
           ));
         },
         //Icon(Icons.add),
-      ),
+      ),*/
     );
   }
 }

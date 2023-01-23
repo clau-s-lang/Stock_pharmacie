@@ -34,12 +34,12 @@ class _Save_salesState extends State<Save_sales> {
             key: _formKey,
             child: Column(
               children: [
-                employTextField(
+                /*employTextField(
                   width: 330,
                   controller: designation,
                   label: 'Nom du produit',
                   hint: 'Veuillez entrer le nom du produit',
-                ),
+                ),*/
                 employTextField(
                   width: 330,
                   controller: quantity,
@@ -64,7 +64,26 @@ class _Save_salesState extends State<Save_sales> {
                   label: 'Observation',
                   hint: 'Donnez une observation',
                 ),
-                Materialbutton(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: MaterialButton(
+                        height: 30,
+                        padding: EdgeInsets.symmetric(vertical: 15.0),
+                        textColor: Colors.white,
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardUser()));
+                          //Navigator.of(context).pushNamed(DashboardUser.routeName);
+                        },
+                        color: Color(0xFF0C8E36),
+                        child: Text('Enregister une vente'),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

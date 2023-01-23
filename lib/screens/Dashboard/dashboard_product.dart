@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pharma/screens/Forms/add_group_product.dart';
+import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
 class DashboardProduct extends StatefulWidget {
@@ -26,7 +27,23 @@ class _DashboardProductState extends State<DashboardProduct> {
             children: [
               Row(
                 children: [
-                  dashProductTile(text: 'Comprimés'),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsParGroupe(),));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      width: 180,
+                      height: 80,
+                      child: Card(
+                        child:  Container(
+                            height: 20,
+                            //width: 50,
+                            child: Center(child: Text('Comprimés', style: TextStyle(fontWeight: FontWeight.bold),))
+                        ),
+                      ),
+                    ),
+                  ),
                   dashProductTile(text: 'Pommades'),
                 ],
               ),

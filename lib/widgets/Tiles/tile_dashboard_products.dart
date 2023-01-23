@@ -7,13 +7,11 @@ Widget dashProductTile({String text = '', routing}) {
     width: 180,
     height: 80,
     child: Card(
-      child: ListTile(
-        title: Container(
+      child:  Container(
           height: 20,
           //width: 50,
             child: Center(child: Text(text, style: TextStyle(fontWeight: FontWeight.bold),))
         ),
-      ),
     ),
   );
 }
