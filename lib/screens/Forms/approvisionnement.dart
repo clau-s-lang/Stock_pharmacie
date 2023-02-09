@@ -6,24 +6,23 @@ import 'package:stock_pharma/models/models.dart';
 import 'package:stock_pharma/screens/Dashboard/edit_product.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
-
 import '../../provider/provider/apiProvider.dart';
 import '../../utils/Loading/loading.dart';
 
-class AddProducts extends StatefulWidget {
-  const AddProducts({Key? key}) : super(key: key);
+class ApprovisionementPage extends StatefulWidget {
+  const ApprovisionementPage({Key? key}) : super(key: key);
 
   @override
-  State<AddProducts> createState() => _AddProductsState();
+  State<ApprovisionementPage> createState() => _ApprovisionementPageState();
 }
 
-class _AddProductsState extends State<AddProducts> {
+class _ApprovisionementPageState extends State<ApprovisionementPage> {
 
-  final name = TextEditingController();
-  final category = TextEditingController();
+  final dateDachat = TextEditingController();
+  final status = TextEditingController();
   final quantity = TextEditingController();
-  final fournisseur = TextEditingController();
-  final description = TextEditingController();
+  /*final fournisseur = TextEditingController();
+  final description = TextEditingController();*/
 
   final _formKey =  GlobalKey<FormState>();
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -34,13 +33,13 @@ class _AddProductsState extends State<AddProducts> {
         ? Loading()
         :Scaffold(
       appBar: AppBar(
-        title: Text('Nouveau produit'),
+        title: Text('Nouvel approvisionement'),
         backgroundColor: Color(0xFF0C8E36),
       ),
       body: Scaffold(
         body: Padding(
           padding:
-              const EdgeInsets.only(left: 15.0, right: 15, top: 60, bottom: 10),
+          const EdgeInsets.only(left: 15.0, right: 15, top: 60, bottom: 10),
           child: Stack(
             children: [
               Container(
@@ -58,7 +57,7 @@ class _AddProductsState extends State<AddProducts> {
                               padding: EdgeInsets.only(top: 80, left: 10, right: 10),
                               child: Form(
                                 key: _formKey,
-                                child: Nom_produit(name: name),
+                                child: Nom_produit(name: dateDachat),
                               ),
                             ),
                           ),
@@ -72,8 +71,8 @@ class _AddProductsState extends State<AddProducts> {
                                   child: employTextField(
                                     height: 50,
                                     width: 100,
-                                    label: 'Categorie',
-                                    controller: category,
+                                    label: 'Status',
+                                    controller: status,
                                   ),
 
                                 ),
@@ -154,14 +153,14 @@ class _AddProductsState extends State<AddProducts> {
               setState(() {
                 loading = true;
               });
-              final prod = Product(
-                name:name.text,
-                category: category.text,
+              final appro = Approvisionement(
+                dateAchat:dateDachat.text,
+                status: status.text,
                 qty: quantity.text,
               );
               final provider = Provider.of<ProviderApi>(context,
                   listen: false);
-              provider.addProd(prod: prod);
+              provider.approv(appro: appro);
             } catch (e) {
               Fluttertoast.showToast(msg: e.toString());
               setState(() {
@@ -180,8 +179,8 @@ class _AddProductsState extends State<AddProducts> {
   }
 
   void clearFields() {
-    name.clear();
-    category.clear();
+    dateDachat.clear();
+    status.clear();
     quantity.clear();
   }
 }

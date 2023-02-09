@@ -1,6 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:stock_pharma/models/models.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
+
+import '../../provider/provider/apiProvider.dart';
 
 class Save_sales extends StatefulWidget {
 
@@ -13,13 +19,15 @@ class Save_sales extends StatefulWidget {
 
 class _Save_salesState extends State<Save_sales> {
 
-  final designation = TextEditingController();
+  final client = TextEditingController();
   final quantity = TextEditingController();
   final formePharma = TextEditingController();
   final date = TextEditingController();
-  final observation = TextEditingController();
+  final status = TextEditingController();
 
   final _formKey =  GlobalKey<FormState>();
+  FirebaseAuth auth = FirebaseAuth.instance;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +42,12 @@ class _Save_salesState extends State<Save_sales> {
             key: _formKey,
             child: Column(
               children: [
-                /*employTextField(
+                employTextField(
                   width: 330,
-                  controller: designation,
-                  label: 'Nom du produit',
-                  hint: 'Veuillez entrer le nom du produit',
-                ),*/
+                  controller: client,
+                  label: 'Nom du Client',
+                  hint: 'Veuillez entrer le nom du Client',
+                ),
                 employTextField(
                   width: 330,
                   controller: quantity,
@@ -60,9 +68,9 @@ class _Save_salesState extends State<Save_sales> {
                 ),
                 employTextField(
                   width: 330,
-                  controller: observation,
-                  label: 'Observation',
-                  hint: 'Donnez une observation',
+                  controller: status,
+                  label: 'Status',
+                  hint: 'Donnez un status',
                 ),
                 Row(
                   children: [
@@ -72,8 +80,32 @@ class _Save_salesState extends State<Save_sales> {
                         padding: EdgeInsets.symmetric(vertical: 15.0),
                         textColor: Colors.white,
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardUser()));
-                          //Navigator.of(context).pushNamed(DashboardUser.routeName);
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                            try {
+                              setState(() {
+                                loading = true;
+                              });
+                              final vente = Vente(
+                                formePharma: formePharma.text,
+                                dateVente:date.text,
+                                status:status.text,
+                                client:client.text,
+                                qty: quantity.text,
+                              );
+                              final provider = Provider.of<ProviderApi>(context,
+                                  listen: false);
+                              provider.addVente(vente: vente);
+                            } catch (e) {
+                              Fluttertoast.showToast(msg: e.toString());
+                              setState(() {
+                                loading = false;
+                              });
+                            }
+                            clearFields();
+                            Navigator.pop(context);
+                          }
+                          //Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardUser()));
                         },
                         color: Color(0xFF0C8E36),
                         child: Text('Enregister une vente'),
@@ -90,6 +122,14 @@ class _Save_salesState extends State<Save_sales> {
         ],
       ),
     );
+  }
+
+  void clearFields() {
+    client.clear();
+    quantity.clear();
+    formePharma.clear();
+    date.clear();
+    status.clear();
   }
 }
 

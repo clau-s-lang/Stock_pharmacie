@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "941655611721",
+    "project_id": "pharmastock-2ae9b",
+    "storage_bucket": "pharmastock-2ae9b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941655611721:android:b322d9182e0e09536b6298",
+        "android_client_info": {
+          "package_name": "com.example.stock_pharma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941655611721-6deps124a15084vvfru6giorihhb5vms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWX6rCaiLsG_AkDrGn11n5N44mwPNxfEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941655611721-6deps124a15084vvfru6giorihhb5vms.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

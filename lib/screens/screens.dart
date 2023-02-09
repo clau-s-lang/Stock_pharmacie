@@ -10,3 +10,6 @@ export 'Forms/add_familly.dart';
 export 'Rapport/RapportVenteStock.dart';
 export 'Dashboard/vente_journalier.dart';
 export 'Dashboard/Details_ventes.dart';
+export 'Forms/sign_in.dart';
+export '../wrapper.dart';
+export 'Forms/approvisionnement.dart';

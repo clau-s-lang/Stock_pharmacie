@@ -49,7 +49,7 @@ class _DashboardUserState extends State<DashboardUser> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>AddProducts(),
+                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ApprovisionementPage(),
                     ));},
                     child: Container(
                       padding: EdgeInsets.all(10),
