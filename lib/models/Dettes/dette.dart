@@ -9,7 +9,7 @@ class Dette{
   Dette(this.prodId, this.dateDette, this.type, this.qty, this.client, this.fournisseur);
 
   Map<String, dynamic> toDette() => {
-    'status':type,
+    'type':type,
     'dateDette':dateDette,
     'qty': qty,
     'client':client,

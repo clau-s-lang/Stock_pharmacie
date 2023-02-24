@@ -16,3 +16,4 @@ export 'Dash/Dash_vente_shower.dart';
 export 'Dash/iconeOption.dart';
 export 'Dash/detailNewBulletin.dart';
 export 'Buttons/material_button.dart';
+export 'Snackbar/snackbar_widget.dart';

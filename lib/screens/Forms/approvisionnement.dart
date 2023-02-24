@@ -1,16 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:stock_pharma/models/models.dart';
-import 'package:stock_pharma/screens/Dashboard/edit_product.dart';
-import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 import '../../provider/provider/apiProvider.dart';
 import '../../utils/Loading/loading.dart';
 
 class ApprovisionementPage extends StatefulWidget {
-  const ApprovisionementPage({Key? key}) : super(key: key);
+  final String productId;
+   ApprovisionementPage({Key? key, required this.productId}) : super(key: key);
 
   @override
   State<ApprovisionementPage> createState() => _ApprovisionementPageState();
@@ -19,11 +19,11 @@ class ApprovisionementPage extends StatefulWidget {
 class _ApprovisionementPageState extends State<ApprovisionementPage> {
 
   final dateDachat = TextEditingController();
-  final status = TextEditingController();
+  final dateExpiration = TextEditingController();
+  final prixAchat = TextEditingController();
   final quantity = TextEditingController();
-  /*final fournisseur = TextEditingController();
-  final description = TextEditingController();*/
-
+  final fournisseur = TextEditingController();
+  final typePaiement = TextEditingController();
   final _formKey =  GlobalKey<FormState>();
   FirebaseAuth auth = FirebaseAuth.instance;
   bool loading = false;
@@ -38,114 +38,64 @@ class _ApprovisionementPageState extends State<ApprovisionementPage> {
       ),
       body: Scaffold(
         body: Padding(
-          padding:
-          const EdgeInsets.only(left: 15.0, right: 15, top: 60, bottom: 10),
-          child: Stack(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
             children: [
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Card(
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          Card(
-                            child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.only(top: 80, left: 10, right: 10),
-                              child: Form(
-                                key: _formKey,
-                                child: Nom_produit(name: dateDachat),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Card(
-                                child: Container(
-                                  height: 60,
-                                  width: 150,
-                                  child: employTextField(
-                                    height: 50,
-                                    width: 100,
-                                    label: 'Status',
-                                    controller: status,
-                                  ),
-
-                                ),
-                              ),
-                              Card(
-                                child: Container(
-                                  height: 60,
-                                  width: 150,
-                                  child: employTextField(
-                                    height: 50,
-                                    width: 100,
-                                    label: 'Quantité',
-                                    controller: quantity,
-                                  ),
-
-                                ),
-                              ),
-                            ],
-                          ),
-                          /*Card(
-                            child: Container(
-                              width: 300,
-                              height: 60,
-                              child: employTextField(
-                                label: 'Fournisseur',
-                              ),
-                            ),
-                          ),
-                          Card(
-                            child: Container(
-                              width: 300,
-                              height: 60,
-                              child: employTextField(
-                                label: 'Description',
-                              ),
-                            ),
-                          ),
-                          Card(
-                            child: Container(
-                              width: 300,
-                              height: 60,
-                              child: employTextField(
-                                label: 'Date d\'expiration',
-                              ),
-                            ),
-                          ),
-*/
-                        ],
-                      ),
-
-                    ),
-
-                  ],
-                ),
+              employTextField(
+                label: 'Prix d\'achat',
+                controller: prixAchat,
               ),
-              Positioned(
-                top: -10,
-                //bottom: 100,
-                left: 120,
-                child: Container(
-                  height: 85,
-                  width: 85,
-                  child: Card(
-                    color: Colors.white70,
-                    child: Icon(Icons.image, color: Colors.grey,),
+              employTextField(
+                label: 'Quantité',
+                controller: quantity,
+              ),
+              employTextField(
+                label: 'Fournisseur',
+                controller: fournisseur,
+              ),
+              employTextField(
+                label: 'Type de paiement',
+                controller: typePaiement,
+              ),
+              SizedBox(height: 10,),
+              Container(
+                child: TextFormField(
+                  controller: dateExpiration,
+                  readOnly: true,
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2022),
+                        lastDate: DateTime.now());
+                    if (pickedDate != null) {
+                      String formattedDate =
+                      DateFormat('yyyy-MM-dd').format(pickedDate);
+                      setState(() {
+                        dateExpiration.text = formattedDate;
+                      });
+                    } else {
+                      snackBarWidget(context,
+                          message: "La date n'est pas selectioné");
+                    }
+                  },
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                            color: Colors.green, style: BorderStyle.solid, width: 1.0),
+                      ),
+                      labelText: 'Date d\'expiration',
+                      hintText: 'Veuillez selectionner la date'
                   ),
                 ),
               ),
+             
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: (){
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
@@ -155,7 +105,7 @@ class _ApprovisionementPageState extends State<ApprovisionementPage> {
               });
               final appro = Approvisionement(
                 dateAchat:dateDachat.text,
-                status: status.text,
+                status: prixAchat.text,
                 qty: quantity.text,
               );
               final provider = Provider.of<ProviderApi>(context,
@@ -172,7 +122,8 @@ class _ApprovisionementPageState extends State<ApprovisionementPage> {
           }
           //Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardUser()));
         },
-        child: Icon(Icons.check),
+        icon: Icon(Icons.check),
+        label: Text('Enregistrer'),
         backgroundColor:Color(0xFF0C8E36) ,
       ),
     );
@@ -180,7 +131,7 @@ class _ApprovisionementPageState extends State<ApprovisionementPage> {
 
   void clearFields() {
     dateDachat.clear();
-    status.clear();
+    prixAchat.clear();
     quantity.clear();
   }
 }

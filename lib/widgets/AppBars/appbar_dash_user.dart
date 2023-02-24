@@ -14,14 +14,14 @@ class AppBarDashUser extends StatelessWidget {
         color: Colors.white,
       ),
       backgroundColor: Color(0xFF0C8E36),
-      actions: [
+      /*actions: [
         Container(
             padding: EdgeInsets.all(10),
             child: CircleAvatar(
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Save_sales(),
-                  ));
+                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>Save_sales(productId: '',),
+                 // ));
                 },
                 child: Text(
                   'V',
@@ -32,7 +32,7 @@ class AppBarDashUser extends StatelessWidget {
                 ),
               ),
             )),
-      ],
+      ],*/
       flexibleSpace: SafeArea(
           child: Container(
         padding: EdgeInsets.only(top: 50),

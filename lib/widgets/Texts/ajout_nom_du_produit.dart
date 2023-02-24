@@ -16,7 +16,6 @@ class Nom_produit extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Groupe de produit : ' + 'Comprimés', style: TextStyle(fontSize: 15),),
           SizedBox(height: 10,),
           encoloredTextField(
             width: 200,

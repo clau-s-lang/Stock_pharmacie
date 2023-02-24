@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stock_pharma/provider/provider/apiProvider.dart';
 import 'package:stock_pharma/screens/screens.dart';
-import 'package:stock_pharma/screens/screens.dart';
+
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print(FirebaseAuth.instance.currentUser!.uid);
+    //print(FirebaseAuth.instance.currentUser!.uid);
     return ChangeNotifierProvider(
       create: (context) => ProviderApi(),
       child: MaterialApp(

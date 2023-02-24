@@ -1,16 +1,17 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:stock_pharma/screens/Forms/add_group_product.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
-class DashboardProduct extends StatefulWidget {
-  const DashboardProduct({Key? key}) : super(key: key);
+class DashProdAppro extends StatefulWidget {
+  const DashProdAppro({Key? key}) : super(key: key);
 
   @override
-  State<DashboardProduct> createState() => _DashboardProductState();
+  State<DashProdAppro> createState() => _DashProdApproState();
 }
 
-class _DashboardProductState extends State<DashboardProduct> {
+class _DashProdApproState extends State<DashProdAppro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,7 @@ class _DashboardProductState extends State<DashboardProduct> {
                 children: [
                   GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsVente(),));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ApprovisionementPage(),));
                     },
                     child: Container(
                       padding: EdgeInsets.all(10),
@@ -45,24 +46,7 @@ class _DashboardProductState extends State<DashboardProduct> {
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsVente(),));
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      width: 180,
-                      height: 80,
-                      child: Card(
-                        child:  Container(
-                            height: 20,
-                            //width: 50,
-                            child: Center(child: Text('Comprimés', style: TextStyle(fontWeight: FontWeight.bold),))
-                        ),
-                      ),
-                    ),
-                  ),
-                  //dashProductTile(text: 'Pommades'),
+                  dashProductTile(text: 'Pommades'),
                 ],
               ),
               Row(
@@ -83,15 +67,7 @@ class _DashboardProductState extends State<DashboardProduct> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddGroupProduct(),
-          ));
-          //Navigator.pushNamed(context, AddGroupProducts.routeName);
-        },
-        backgroundColor: Color(0xFF0C8E36),
-        child: Icon(Icons.add),
-      ),
     );
   }
 }
+*/

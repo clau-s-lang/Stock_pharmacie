@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pharma/screens/Dashboard/dashboard_product.dart';
-import 'package:stock_pharma/screens/Rapport/Dash_Rapport.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
@@ -22,11 +21,13 @@ class _DashboardUserState extends State<DashboardUser> {
       body: ListView(
         children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
-                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardProduct(),
+                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsVente(),
                     ));},
                     child: Container(
                       padding: EdgeInsets.all(10),
@@ -42,14 +43,14 @@ class _DashboardUserState extends State<DashboardUser> {
                                 image: AssetImage('images/medoc.png'),
                               ),
                             ),
-                            Container(height:20,child: Center(child: Text('Produits'))),
+                            Container(height:20,child: Center(child: Text('Ventes'))),
                           ],
                         ),
                       ),
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ApprovisionementPage(),
+                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsAppov(),
                     ));},
                     child: Container(
                       padding: EdgeInsets.all(10),
@@ -74,9 +75,10 @@ class _DashboardUserState extends State<DashboardUser> {
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
-                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsParGroupe(),
+                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsStock(),
                     ));},
                     child: Container(
                       padding: EdgeInsets.all(10),
@@ -99,17 +101,18 @@ class _DashboardUserState extends State<DashboardUser> {
                     ),
                   ),
                   dashUserTile(
-                    text: 'Occasionnelles',
+                    text: 'Rapport',
                   ),
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   dashUserTile(
-                    text: 'Rapports',
+                    text: 'Profil',
                   ),
                   dashUserTile(
-                    text: 'Ventes',
+                    text: 'Deconnexion',
                   ),
                 ],
               ),

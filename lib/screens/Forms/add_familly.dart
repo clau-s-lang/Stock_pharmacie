@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
@@ -51,6 +52,39 @@ class _AddFamillyState extends State<AddFamilly> {
                   controller: adresse,
                   label: 'Adresse du client',
                   hint: 'Entrez l\'adresse du client',
+                ),
+                Container(
+                  width: 330,
+                  child: TextFormField(
+                    controller: date,
+                    style: TextStyle(
+                      fontSize: 15,
+                      height: 0.5,
+                    ),
+                    readOnly: true,
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2022),
+                          lastDate: DateTime.now());
+                      if (pickedDate != null) {
+                        String formattedDate =
+                        DateFormat('yyyy-MM-dd').format(pickedDate);
+                        setState(() {
+                          date.text = formattedDate;
+                        });
+                      } else {
+                        snackBarWidget(context,
+                            message: "La date n'est pas selectioné");
+                      }
+                    },
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Date d\'enregistrement',
+                        hintText: 'Veuillez selectionner la date'
+                    ),
+                  ),
                 ),
                 employTextField(
                   width: 330,

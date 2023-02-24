@@ -4,17 +4,18 @@ import 'package:stock_pharma/widgets/widgets.dart';
 Widget dashlistproducts(
     {String? designation,
     String? mg,
-    String? description,
+    String? categorie,
     String? prix,
     String? nombre,
-    routing}) {
+    }) {
   return Container(
     padding: EdgeInsets.only(left: 12, right: 12, top: 6, bottom: 6),
-    height: 120,
+    height: 100,
     child: Card(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Image_produit(),
+         // Image_produit(),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Column(
@@ -26,9 +27,10 @@ Widget dashlistproducts(
                     fontSize: 18,
                   ),
                 ),
-                Text('$mg'+ ' ' +'g'),
-                SizedBox(height: 5,),
-                Text('$description'),
+                SizedBox(height: 10,),
+                Text('Date d\'expiration'+': '+'$mg'+ ' ' ),
+
+                //Text('$categorie'),
               ],
             ),
           ),
@@ -36,7 +38,7 @@ Widget dashlistproducts(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
             child: Column(children: [
               Text('$prix' + ' '+'\$', style: TextStyle(fontSize: 15),),
-              SizedBox(height: 12,),
+              SizedBox(height: 10,),
               Text('$nombre', style: TextStyle(fontSize: 13),),
               Text('Disponibles', style: TextStyle(fontWeight: FontWeight.bold),),
             ],),

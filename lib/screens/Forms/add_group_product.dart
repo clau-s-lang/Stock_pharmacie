@@ -52,7 +52,7 @@ class _AddGroupProductState extends State<AddGroupProduct> {
                         padding: EdgeInsets.all(15.0),
                         textColor: Colors.white,
                         onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsParGroupe()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsVente()));
                           //Navigator.of(context).pushNamed(DashboardUser.routeName);
                         },
                         color: Color(0xFF0C8E36),

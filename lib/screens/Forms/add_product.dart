@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:stock_pharma/models/models.dart';
 import 'package:stock_pharma/screens/Dashboard/edit_product.dart';
@@ -23,7 +24,11 @@ class _AddProductsState extends State<AddProducts> {
   final category = TextEditingController();
   final quantity = TextEditingController();
   final fournisseur = TextEditingController();
+  final dateExp = TextEditingController();
   final description = TextEditingController();
+  final formePharm = TextEditingController();
+  final prix = TextEditingController();
+  String uniteMesure = 'Non specifié';
 
   final _formKey =  GlobalKey<FormState>();
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -40,113 +45,184 @@ class _AddProductsState extends State<AddProducts> {
       body: Scaffold(
         body: Padding(
           padding:
-              const EdgeInsets.only(left: 15.0, right: 15, top: 60, bottom: 10),
-          child: Stack(
-            children: [
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                child: Column(
+              const EdgeInsets.only(left: 15.0, right: 15, top: 20, bottom: 10),
+          child: Container(
+            height: double.infinity,
+            width: double.infinity,
+            child: ListView(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Card(
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          Card(
-                            child: Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.only(top: 80, left: 10, right: 10),
-                              child: Form(
-                                key: _formKey,
-                                child: Nom_produit(name: name),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Card(
-                                child: Container(
-                                  height: 60,
-                                  width: 150,
-                                  child: employTextField(
-                                    height: 50,
-                                    width: 100,
-                                    label: 'Categorie',
-                                    controller: category,
-                                  ),
-
-                                ),
-                              ),
-                              Card(
-                                child: Container(
-                                  height: 60,
-                                  width: 150,
-                                  child: employTextField(
-                                    height: 50,
-                                    width: 100,
-                                    label: 'Quantité',
-                                    controller: quantity,
-                                  ),
-
-                                ),
-                              ),
-                            ],
-                          ),
-                          /*Card(
-                            child: Container(
-                              width: 300,
-                              height: 60,
-                              child: employTextField(
-                                label: 'Fournisseur',
-                              ),
-                            ),
-                          ),
-                          Card(
-                            child: Container(
-                              width: 300,
-                              height: 60,
-                              child: employTextField(
-                                label: 'Description',
-                              ),
-                            ),
-                          ),
-                          Card(
-                            child: Container(
-                              width: 300,
-                              height: 60,
-                              child: employTextField(
-                                label: 'Date d\'expiration',
-                              ),
-                            ),
-                          ),
-*/
-                        ],
+                    employTextField(
+                      label: 'Nom du produit',
+                      controller: name,
+                    ),
+                    employTextField(
+                      label: 'Categorie du produit',
+                      controller: category,
+                    ),
+                    employTextField(
+                      label: 'Quantité',
+                      controller: quantity,
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Text('Unité de mesure', style: TextStyle(fontSize: 17),),
                       ),
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            horizontalTitleGap: 0,
+                            title: Text(
+                              'Non specifié',
 
+                            ),
+                            leading: Radio<String>(
+                              value: 'Non specifié',
+                              groupValue: uniteMesure,
+                              onChanged: (value) {
+                                setState(() {
+                                  uniteMesure = value!;
+                                });
+                              },
+                              activeColor: Colors.green,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            horizontalTitleGap: 0,
+                            title: Text(
+                              'Boite',
+
+                            ),
+                            leading: Radio<String>(
+                              value: 'Boite',
+                              groupValue: uniteMesure,
+                              onChanged: (value) {
+                                setState(() {
+                                  uniteMesure = value!;
+                                });
+                              },
+                              activeColor: Colors.green,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            horizontalTitleGap: 0,
+                            title: Text(
+                              'Flacon',
+
+                            ),
+                            leading: Radio<String>(
+                              value: 'Flacon',
+                              groupValue: uniteMesure,
+                              onChanged: (value) {
+                                setState(() {
+                                  uniteMesure = value!;
+                                });
+                              },
+                              activeColor: Color(0xFF216DAD),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            horizontalTitleGap: 0,
+                            title: Text(
+                              'Plaquette',
+
+                            ),
+                            leading: Radio<String>(
+                              value: 'Plaquette',
+                              groupValue: uniteMesure,
+                              onChanged: (value) {
+                                setState(() {
+                                  uniteMesure = value!;
+                                });
+                              },
+                              activeColor: Color(0xFF216DAD),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                   employTextField(
+                     label: 'Forme pharmaceutique',
+                     controller: formePharm,
+                   ),
+                    employTextField(
+                      label: 'Prix de vente',
+                      controller: prix,
+                    ),
+                    Container(
+                      width: 350,
+                      child: TextFormField(
+                        controller: dateExp,
+                        // style: TextStyle(
+                        //   fontSize: 15,
+                        //   height: 0.5,
+                        // ),
+                        readOnly: true,
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(2022),
+                              lastDate: DateTime.now());
+                          if (pickedDate != null) {
+                            String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                            setState(() {
+                              dateExp.text = formattedDate;
+                            });
+                          } else {
+                            snackBarWidget(context,
+                                message: "La date n'est pas selectioné");
+                          }
+                        },
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Date d\'expiration',
+                            hintText: 'Veuillez selectionner la date'
+                        ),
+                      ),
                     ),
 
                   ],
                 ),
-              ),
-              Positioned(
-                top: -10,
-                //bottom: 100,
-                left: 120,
-                child: Container(
-                  height: 85,
-                  width: 85,
-                  child: Card(
-                    color: Colors.white70,
-                    child: Icon(Icons.image, color: Colors.grey,),
-                  ),
-                ),
-              ),
-            ],
+
+              ],
+            ),
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: (){
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
@@ -158,6 +234,9 @@ class _AddProductsState extends State<AddProducts> {
                 name:name.text,
                 category: category.text,
                 qty: quantity.text,
+                dateExp: dateExp.text,
+                formePharm: formePharm.text,
+                prix: prix.text,
               );
               final provider = Provider.of<ProviderApi>(context,
                   listen: false);
@@ -173,7 +252,8 @@ class _AddProductsState extends State<AddProducts> {
           }
           //Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardUser()));
         },
-        child: Icon(Icons.check),
+        icon: Icon(Icons.check),
+        label: Text('Enregistrer'),
         backgroundColor:Color(0xFF0C8E36) ,
       ),
     );
