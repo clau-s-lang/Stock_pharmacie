@@ -18,3 +18,4 @@ export 'Description/List_product_approv.dart';
 export 'Description/List_product_stock.dart';
 export 'Forms/modification_prod.dart';
 export 'Description/Details_produit.dart';
+export 'Forms/modification_prod.dart';

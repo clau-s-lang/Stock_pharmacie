@@ -49,175 +49,178 @@ class _AddProductsState extends State<AddProducts> {
           child: Container(
             height: double.infinity,
             width: double.infinity,
-            child: ListView(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    employTextField(
-                      label: 'Nom du produit',
-                      controller: name,
-                    ),
-                    employTextField(
-                      label: 'Categorie du produit',
-                      controller: category,
-                    ),
-                    employTextField(
-                      label: 'Quantité',
-                      controller: quantity,
-                    ),
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Text('Unité de mesure', style: TextStyle(fontSize: 17),),
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      employTextField(
+                        label: 'Nom du produit',
+                        controller: name,
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            horizontalTitleGap: 0,
-                            title: Text(
-                              'Non specifié',
-
-                            ),
-                            leading: Radio<String>(
-                              value: 'Non specifié',
-                              groupValue: uniteMesure,
-                              onChanged: (value) {
-                                setState(() {
-                                  uniteMesure = value!;
-                                });
-                              },
-                              activeColor: Colors.green,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            horizontalTitleGap: 0,
-                            title: Text(
-                              'Boite',
-
-                            ),
-                            leading: Radio<String>(
-                              value: 'Boite',
-                              groupValue: uniteMesure,
-                              onChanged: (value) {
-                                setState(() {
-                                  uniteMesure = value!;
-                                });
-                              },
-                              activeColor: Colors.green,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            horizontalTitleGap: 0,
-                            title: Text(
-                              'Flacon',
-
-                            ),
-                            leading: Radio<String>(
-                              value: 'Flacon',
-                              groupValue: uniteMesure,
-                              onChanged: (value) {
-                                setState(() {
-                                  uniteMesure = value!;
-                                });
-                              },
-                              activeColor: Color(0xFF216DAD),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            horizontalTitleGap: 0,
-                            title: Text(
-                              'Plaquette',
-
-                            ),
-                            leading: Radio<String>(
-                              value: 'Plaquette',
-                              groupValue: uniteMesure,
-                              onChanged: (value) {
-                                setState(() {
-                                  uniteMesure = value!;
-                                });
-                              },
-                              activeColor: Color(0xFF216DAD),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                   employTextField(
-                     label: 'Forme pharmaceutique',
-                     controller: formePharm,
-                   ),
-                    employTextField(
-                      label: 'Prix de vente',
-                      controller: prix,
-                    ),
-                    Container(
-                      width: 350,
-                      child: TextFormField(
-                        controller: dateExp,
-                        // style: TextStyle(
-                        //   fontSize: 15,
-                        //   height: 0.5,
-                        // ),
-                        readOnly: true,
-                        onTap: () async {
-                          DateTime? pickedDate = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(2022),
-                              lastDate: DateTime.now());
-                          if (pickedDate != null) {
-                            String formattedDate =
-                            DateFormat('yyyy-MM-dd').format(pickedDate);
-                            setState(() {
-                              dateExp.text = formattedDate;
-                            });
-                          } else {
-                            snackBarWidget(context,
-                                message: "La date n'est pas selectioné");
-                          }
-                        },
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Date d\'expiration',
-                            hintText: 'Veuillez selectionner la date'
+                      employTextField(
+                        label: 'Categorie du produit',
+                        controller: category,
+                      ),
+                      employTextField(
+                        label: 'Quantité',
+                        controller: quantity,
+                      ),
+                      Container(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Text('Unité de mesure', style: TextStyle(fontSize: 17),),
                         ),
                       ),
-                    ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              horizontalTitleGap: 0,
+                              title: Text(
+                                'Non specifié',
 
-                  ],
-                ),
+                              ),
+                              leading: Radio<String>(
+                                value: 'Non specifié',
+                                groupValue: uniteMesure,
+                                onChanged: (value) {
+                                  setState(() {
+                                    uniteMesure = value!;
+                                  });
+                                },
+                                activeColor: Colors.green,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              horizontalTitleGap: 0,
+                              title: Text(
+                                'Boite',
 
-              ],
+                              ),
+                              leading: Radio<String>(
+                                value: 'Boite',
+                                groupValue: uniteMesure,
+                                onChanged: (value) {
+                                  setState(() {
+                                    uniteMesure = value!;
+                                  });
+                                },
+                                activeColor: Colors.green,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              horizontalTitleGap: 0,
+                              title: Text(
+                                'Flacon',
+
+                              ),
+                              leading: Radio<String>(
+                                value: 'Flacon',
+                                groupValue: uniteMesure,
+                                onChanged: (value) {
+                                  setState(() {
+                                    uniteMesure = value!;
+                                  });
+                                },
+                                activeColor: Color(0xFF216DAD),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              horizontalTitleGap: 0,
+                              title: Text(
+                                'Plaquette',
+
+                              ),
+                              leading: Radio<String>(
+                                value: 'Plaquette',
+                                groupValue: uniteMesure,
+                                onChanged: (value) {
+                                  setState(() {
+                                    uniteMesure = value!;
+                                  });
+                                },
+                                activeColor: Color(0xFF216DAD),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                     employTextField(
+                       label: 'Forme pharmaceutique',
+                       controller: formePharm,
+                     ),
+                      employTextField(
+                        label: 'Prix de vente',
+                        controller: prix,
+                      ),
+                      Container(
+                        width: 350,
+                        child: TextFormField(
+                          controller: dateExp,
+                          // style: TextStyle(
+                          //   fontSize: 15,
+                          //   height: 0.5,
+                          // ),
+                          readOnly: true,
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2022),
+                                lastDate: DateTime.now());
+                            if (pickedDate != null) {
+                              String formattedDate =
+                              DateFormat('yyyy-MM-dd').format(pickedDate);
+                              setState(() {
+                                dateExp.text = formattedDate;
+                              });
+                            } else {
+                              snackBarWidget(context,
+                                  message: "La date n'est pas selectioné");
+                            }
+                          },
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Date d\'expiration',
+                              hintText: 'Veuillez selectionner la date'
+                          ),
+                        ),
+                      ),
+
+                    ],
+                  ),
+
+                ],
+              ),
             ),
           ),
         ),
@@ -237,6 +240,7 @@ class _AddProductsState extends State<AddProducts> {
                 dateExp: dateExp.text,
                 formePharm: formePharm.text,
                 prix: prix.text,
+                uniteMesure: uniteMesure
               );
               final provider = Provider.of<ProviderApi>(context,
                   listen: false);

@@ -37,7 +37,7 @@ Widget dashlistproducts(
           Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
             child: Column(children: [
-              Text('$prix' + ' '+'\$', style: TextStyle(fontSize: 15),),
+              Text('$prix' + ' '+'Fc', style: TextStyle(fontSize: 15),),
               SizedBox(height: 10,),
               Text('$nombre', style: TextStyle(fontSize: 13),),
               Text('Disponibles', style: TextStyle(fontWeight: FontWeight.bold),),

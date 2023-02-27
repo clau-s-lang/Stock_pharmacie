@@ -191,8 +191,8 @@ class _Save_salesState extends State<Save_sales> {
                       employTextField(
                         width: 330,
                         controller: prixVente,//automatique
-                        label: 'Forme pharmaceutique',
-                        hint: 'Veuillez entrer la forme pharmaceutique',
+                        label: 'Prix de  vente',
+                        hint: 'Veuillez entrer le prix',
                       ),
                      /* Container(
                         width: 330,
@@ -243,10 +243,9 @@ class _Save_salesState extends State<Save_sales> {
                                       loading = true;
                                     });
                                     final vente = Vente(
-                                      formePharma: prixVente.text,
+                                      prixVente: prixVente.text,
                                       dateVente:DateTime.now() as String,
-                                      status:status.text,
-                                      client:client.text,
+                                      uniteMesure:uniteMesure,
                                       qty: quantity.text,
                                     );
                                     final provider = Provider.of<ProviderApi>(context,

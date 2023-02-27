@@ -18,7 +18,6 @@ class ApprovisionementPage extends StatefulWidget {
 
 class _ApprovisionementPageState extends State<ApprovisionementPage> {
 
-  final dateDachat = TextEditingController();
   final dateExpiration = TextEditingController();
   final prixAchat = TextEditingController();
   final quantity = TextEditingController();
@@ -37,60 +36,67 @@ class _ApprovisionementPageState extends State<ApprovisionementPage> {
         backgroundColor: Color(0xFF0C8E36),
       ),
       body: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
+        body: Form(
+          key: _formKey,
+          child: ListView(
             children: [
-              employTextField(
-                label: 'Prix d\'achat',
-                controller: prixAchat,
-              ),
-              employTextField(
-                label: 'Quantité',
-                controller: quantity,
-              ),
-              employTextField(
-                label: 'Fournisseur',
-                controller: fournisseur,
-              ),
-              employTextField(
-                label: 'Type de paiement',
-                controller: typePaiement,
-              ),
-              SizedBox(height: 10,),
-              Container(
-                child: TextFormField(
-                  controller: dateExpiration,
-                  readOnly: true,
-                  onTap: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2022),
-                        lastDate: DateTime.now());
-                    if (pickedDate != null) {
-                      String formattedDate =
-                      DateFormat('yyyy-MM-dd').format(pickedDate);
-                      setState(() {
-                        dateExpiration.text = formattedDate;
-                      });
-                    } else {
-                      snackBarWidget(context,
-                          message: "La date n'est pas selectioné");
-                    }
-                  },
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                            color: Colors.green, style: BorderStyle.solid, width: 1.0),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    employTextField(
+                      label: 'Prix d\'achat',
+                      controller: prixAchat,
+                    ),
+                    employTextField(
+                      label: 'Quantité',
+                      controller: quantity,
+                    ),
+                    employTextField(
+                      label: 'Fournisseur',
+                      controller: fournisseur,
+                    ),
+                    employTextField(
+                      label: 'Type de paiement',
+                      controller: typePaiement,
+                    ),
+                    SizedBox(height: 10,),
+                    Container(
+                      child: TextFormField(
+                        controller: dateExpiration,
+                        readOnly: true,
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(2022),
+                              lastDate: DateTime.now());
+                          if (pickedDate != null) {
+                            String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                            setState(() {
+                              dateExpiration.text = formattedDate;
+                            });
+                          } else {
+                            snackBarWidget(context,
+                                message: "La date n'est pas selectioné");
+                          }
+                        },
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                  color: Colors.green, style: BorderStyle.solid, width: 1.0),
+                            ),
+                            labelText: 'Date d\'expiration',
+                            hintText: 'Veuillez selectionner la date'
+                        ),
                       ),
-                      labelText: 'Date d\'expiration',
-                      hintText: 'Veuillez selectionner la date'
-                  ),
+                    ),
+
+                  ],
                 ),
               ),
-             
             ],
           ),
         ),
@@ -104,9 +110,12 @@ class _ApprovisionementPageState extends State<ApprovisionementPage> {
                 loading = true;
               });
               final appro = Approvisionement(
-                dateAchat:dateDachat.text,
-                status: prixAchat.text,
+                dateAchat: DateTime.now() as String,
+                prixAchat: prixAchat.text,
                 qty: quantity.text,
+                fournisseur: fournisseur.text,
+                typePaiement: typePaiement.text,
+                dateExp: dateExpiration.text,
               );
               final provider = Provider.of<ProviderApi>(context,
                   listen: false);
@@ -130,9 +139,12 @@ class _ApprovisionementPageState extends State<ApprovisionementPage> {
   }
 
   void clearFields() {
-    dateDachat.clear();
+    dateExpiration.clear();
     prixAchat.clear();
     quantity.clear();
+    fournisseur.clear();
+    typePaiement.clear();
+    dateExpiration.clear();
   }
 }
 

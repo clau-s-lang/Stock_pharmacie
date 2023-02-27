@@ -1,18 +1,16 @@
 class Vente{
   String? prodId;
   final String dateVente;
-  final String status; //payé ou non payé
   final String qty;
-  final String client;
-  final String formePharma;
+  final prixVente;
+  final String uniteMesure;
 
-  Vente({required this.dateVente, required this.status, required this.qty, required this.client, required this.formePharma});
+  Vente({required this.dateVente, required this.uniteMesure, required this.qty,required this.prixVente});
 
   Map<String, dynamic> toVente() => {
-    'status':status,
+    'uniteMesure':uniteMesure,
     'dateVente':dateVente,
     'qty': qty,
-    'client':client,
-    'formePharma': formePharma,
+    'prixVente':prixVente,
   };
 }
