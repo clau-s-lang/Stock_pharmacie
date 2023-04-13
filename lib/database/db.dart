@@ -8,9 +8,10 @@ class FireBaseApi extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future signUpWithEmail({required String email,
-    required String password,
-    required Employee employee}) async {
+  Future signUpWithEmail(
+      {required String email,
+      required String password,
+      required Employee employee}) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -28,22 +29,24 @@ class FireBaseApi extends ChangeNotifier {
       } else if (e.code == 'too-many-requests') {
         Fluttertoast.showToast(
             msg:
-            'Nous avons bloqué toutes les requetes en provenance de votre appareil suite à une activté inhabituelle ');
+                'Nous avons bloqué toutes les requetes en provenance de votre appareil suite à une activté inhabituelle ');
       }
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     }
   }
 
-  Future toFirestore (User? user, Employee employee) async {
+  Future toFirestore(User? user, Employee employee) async {
     try {
       // UserCredential userCredential = await auth.createUserWithEmailAndPassword(
       //   email: employee.email,
       //   password: employee.password,
       // );
-     // employee.UserId = user!.uid;
+      // employee.UserId = user!.uid;
       await _firestore
-          .collection('Pony').doc('Gallia').collection('Employees')
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Employees')
           .doc(auth.currentUser!.uid)
           .set(employee.toEmployee());
       await _firestore
@@ -60,7 +63,7 @@ class FireBaseApi extends ChangeNotifier {
       {required String email, required String password, context}) async {
     try {
       UserCredential userCredential =
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -74,19 +77,28 @@ class FireBaseApi extends ChangeNotifier {
       } else if (e.code == 'too-many-requests') {
         Fluttertoast.showToast(
             msg:
-            'Nous avons bloqué toutes les requetes en provenance de votre appareil suite à une activté inhabituelle');
+                'Nous avons bloqué toutes les requetes en provenance de votre appareil suite à une activté inhabituelle');
       }
     }
   }
 
   Future addProduit({required Product prod}) async {
     try {
-      final docIdP = FirebaseFirestore.instance.collection('Pony').doc('Gallia').collection('Produits').doc();
+      final docIdP = FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Produits')
+          .doc();
       String docId = docIdP.id;
       prod.prodId = docId;
-      await FirebaseFirestore.instance.collection('Pony').doc('Gallia').collection('Produits').doc(docId).set(
-        prod.toProduct(),
-      );
+      await FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Produits')
+          .doc(docId)
+          .set(
+            prod.toProduct(),
+          );
     } catch (e) {
       print(e);
     }
@@ -94,12 +106,21 @@ class FireBaseApi extends ChangeNotifier {
 
   Future addVente({required Vente vente}) async {
     try {
-      final docIdV = FirebaseFirestore.instance.collection('Pony').doc('Gallia').collection('Ventes').doc();
+      final docIdV = FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Ventes')
+          .doc();
       String docId = docIdV.id;
       vente.prodId = docId;
-      await FirebaseFirestore.instance.collection('Pony').doc('Gallia').collection('Ventes').doc(docId).set(
-        vente.toVente(),
-      );
+      await FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Ventes')
+          .doc(docId)
+          .set(
+            vente.toVente(),
+          );
     } catch (e) {
       print(e);
     }
@@ -107,13 +128,117 @@ class FireBaseApi extends ChangeNotifier {
 
   Future approv({required Approvisionement appro}) async {
     try {
-      final docIdVAp = FirebaseFirestore.instance.collection('Pony').doc('Gallia').collection('Approvisionement').doc();
+      final docIdVAp = FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Approvisionement')
+          .doc();
       String docId = docIdVAp.id;
       appro.prodId = docId;
-      await FirebaseFirestore.instance.collection('Pony').doc('Gallia').collection('Approvisionement').doc(docId).set(
-        appro.toApprovisionement(),
-      );
+      await FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Approvisionement')
+          .doc(docId)
+          .set(
+            appro.toApprovisionement(),
+          );
     } catch (e) {
+      print(e);
+    }
+  }
+
+  Future UpdateApprov({required Product prod}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Produits')
+          .doc(prod.prodId)
+          .update(
+            prod.toProduct(),
+          );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future UpdateQuantProd(
+      {required String quantite, required String prodId}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Produits')
+          .doc(prodId)
+          .set({
+        'qty': quantite,
+      }, SetOptions(merge: true)).whenComplete(() {});
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
+
+  Future UpdateDateExpProd(
+      {required String dateExp, required String prodId}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Produits')
+          .doc(prodId)
+          .set({
+        'date d\'expiration': dateExp,
+      }, SetOptions(merge: true)).whenComplete(() {});
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
+
+  Future UpdatePrixProd(
+      {required String prix, required String prodId}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Produits')
+          .doc(prodId)
+          .set({
+        'price': prix,
+      }, SetOptions(merge: true)).whenComplete(() {});
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
+
+  Future UpdateQtyAfterVente(
+      {required double quantV, required double qty, required String prodId}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Produits')
+          .doc(prodId)
+          .set({
+        'qty': qty - quantV,
+      }, SetOptions(merge: true)).whenComplete(() {});
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
+
+  Future UpdateQtyAfterApp(
+      {required double quantAp, required double qty, required String prodId}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Pony')
+          .doc('Gallia')
+          .collection('Produits')
+          .doc(prodId)
+          .set({
+        'qty': qty + quantAp,
+      }, SetOptions(merge: true)).whenComplete(() {});
+    } on FirebaseException catch (e) {
       print(e);
     }
   }

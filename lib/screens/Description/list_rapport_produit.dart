@@ -5,14 +5,14 @@ import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/Tiles/tile_liste_product.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
-class ListDeProduitsVente extends StatefulWidget {
-  const ListDeProduitsVente({Key? key}) : super(key: key);
+class ListDeProduits extends StatefulWidget {
+  const ListDeProduits({Key? key}) : super(key: key);
 
   @override
-  State<ListDeProduitsVente> createState() => _ListDeProduitsVenteState();
+  State<ListDeProduits> createState() => _ListDeProduitsState();
 }
 
-class _ListDeProduitsVenteState extends State<ListDeProduitsVente> {
+class _ListDeProduitsState extends State<ListDeProduits> {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
@@ -63,14 +63,14 @@ class _ListDeProduitsVenteState extends State<ListDeProduitsVente> {
                 DocumentSnapshot produit = snapshot.data!.docs[index];
                 return GestureDetector(
                   onTap: () {
-                   Navigator.push(
+                    Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => Save_sales(
-                                  productId: produit['prodId'],
+                              productId: produit['prodId'],
                               quantite: double.parse(produit['qty'].toString()),
                               prix: double.parse(produit['price'].toString()),
-                                )));
+                            )));
                   },
                   child: dashlistproducts(
                     designation: produit['name'],
@@ -86,52 +86,4 @@ class _ListDeProduitsVenteState extends State<ListDeProduitsVente> {
   }
 }
 
-class MySearch extends SearchDelegate {
-  @override
-  Widget? buildLeading(BuildContext context) => IconButton(
-        onPressed: () => close(context, null),
-        icon: Icon(Icons.arrow_back),
-      );
-  @override
-  List<Widget>? buildActions(BuildContext context) => [
-        IconButton(
-          onPressed: () {
-            if (query.isEmpty) {
-              close(context, null);
-            } else {
-              query = '';
-            }
-          },
-          icon: Icon(Icons.clear),
-        ),
-      ];
 
-  @override
-  Widget buildResults(BuildContext context) => Center(
-        child: Text(query),
-      ); //a refaire
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection('Pony')
-          .doc('Gallia')
-          .collection('Produits')
-          .snapshots(),
-      builder: (context, snapshot) {
-        return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (context, index) {
-              DocumentSnapshot prodSearch = snapshot.data!.docs[index];
-              return ListTile(
-                title: prodSearch['name'],
-                onTap: () {
-                  query = prodSearch['name'];
-                },
-              );
-            });
-      },
-    );
-  }
-}

@@ -2,17 +2,17 @@ class Product{
   String? prodId;
   final name;
   final String uniteMesure;
-  final String category;
-  final String qty;
+  final String categorie;
+  final double qty;
   final String dateExp;
   final String formePharm;
-  final String prix;
+  final double prix;
 
-  Product({required this.uniteMesure, required this.name, required this.category, required this.qty, required this.dateExp, required this.formePharm, required this.prix});
+  Product({required this.uniteMesure, required this.name, required this.categorie, required this.qty, required this.dateExp, required this.formePharm, required this.prix});
 
   Map<String, dynamic> toProduct() => {
     'name':name,
-    'categorie':category,
+    'categorie':categorie,
     'qty': qty,
     'date d\'expiration' : dateExp,
     'formePharm':formePharm,

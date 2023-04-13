@@ -8,6 +8,9 @@ class DescriptionProduit extends StatefulWidget {
   final String dateExp;
   final String Prix;
   final String Nombre;
+  final String uniteMesure;
+  final String category;
+  final String formePharm;
 
   DescriptionProduit(
       {Key? key,
@@ -15,7 +18,7 @@ class DescriptionProduit extends StatefulWidget {
       required this.dateExp,
       required this.nom,
       required this.Nombre,
-      required this.Prix})
+      required this.Prix, required this.uniteMesure, required this.category, required this.formePharm})
       : super(key: key);
 
   @override
@@ -121,7 +124,12 @@ class _DescriptionProduitState extends State<DescriptionProduit> {
                                             ModifierProduitNombre(
                                               idProd: widget.idProd,
                                               nom: widget.nom,
-                                              Nombre: widget.Nombre,
+                                              qty: widget.Nombre,
+                                              uniteMesure: widget.uniteMesure,
+                                              category: widget.category,
+                                              formePharm: widget.formePharm,
+                                              dateExp: widget.dateExp,
+                                              prix: widget.Prix,
                                             )));
                               },
                               icon: Icon(
@@ -158,7 +166,22 @@ class _DescriptionProduitState extends State<DescriptionProduit> {
                           ),
                           //SizedBox(width: 20,),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ModifierProduitPrix(
+                                              idProd: widget.idProd,
+                                              nom: widget.nom,
+                                              qty: widget.Nombre,
+                                              uniteMesure: widget.uniteMesure,
+                                              category: widget.category,
+                                              formePharm: widget.formePharm,
+                                              dateExp: widget.dateExp,
+                                              prix: widget.Prix,
+                                            )));
+                              },
                               icon: Icon(
                                 Icons.edit,
                                 color: Color(0xFF0C8E36),
@@ -193,7 +216,22 @@ class _DescriptionProduitState extends State<DescriptionProduit> {
                           ),
                           //SizedBox(width: 20,),
                           IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ModifierProduitExp(
+                                              idProd: widget.idProd,
+                                              nom: widget.nom,
+                                              qty: widget.Nombre,
+                                              uniteMesure: widget.uniteMesure,
+                                              category: widget.category,
+                                              formePharm: widget.formePharm,
+                                              dateExp: widget.dateExp,
+                                              prix: widget.Prix,
+                                            )));
+                              },
                               icon: Icon(
                                 Icons.edit,
                                 color: Color(0xFF0C8E36),

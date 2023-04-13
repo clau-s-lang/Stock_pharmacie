@@ -10,7 +10,9 @@ import '../../utils/Loading/loading.dart';
 
 class ApprovisionementPage extends StatefulWidget {
   final String productId;
-   ApprovisionementPage({Key? key, required this.productId}) : super(key: key);
+  final String nom;
+  final double quantity;
+   ApprovisionementPage({Key? key, required this.productId, required this.nom, required this.quantity}) : super(key: key);
 
   @override
   State<ApprovisionementPage> createState() => _ApprovisionementPageState();
@@ -110,9 +112,10 @@ class _ApprovisionementPageState extends State<ApprovisionementPage> {
                 loading = true;
               });
               final appro = Approvisionement(
-                dateAchat: DateTime.now() as String,
-                prixAchat: prixAchat.text,
-                qty: quantity.text,
+                nom: widget.nom,
+                dateAchat: DateTime.now().toString(),
+                prixAchat: double.parse(prixAchat.text),
+                qty: double.parse(quantity.text),
                 fournisseur: fournisseur.text,
                 typePaiement: typePaiement.text,
                 dateExp: dateExpiration.text,
@@ -120,6 +123,7 @@ class _ApprovisionementPageState extends State<ApprovisionementPage> {
               final provider = Provider.of<ProviderApi>(context,
                   listen: false);
               provider.approv(appro: appro);
+              provider.UpdateQtyAp(quantAp: double.parse(quantity.text), qty: widget.quantity, prodId: widget.productId);
             } catch (e) {
               Fluttertoast.showToast(msg: e.toString());
               setState(() {

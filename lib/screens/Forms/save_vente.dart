@@ -12,8 +12,10 @@ import '../../provider/provider/apiProvider.dart';
 
 class Save_sales extends StatefulWidget {
   final String productId;
+  final double quantite;
+  final double prix;
 
-  Save_sales({Key? key, required this.productId}) : super(key: key);
+  Save_sales({Key? key, required this.productId, required this.quantite, required this.prix}) : super(key: key);
 
   @override
   State<Save_sales> createState() => _Save_salesState();
@@ -188,44 +190,11 @@ class _Save_salesState extends State<Save_sales> {
                         label: 'Quantité vendue',
                         hint: 'Veuillez entrer la quantité',
                       ),
-                      employTextField(
+                      /*employTextField(
                         width: 330,
                         controller: prixVente,//automatique
                         label: 'Prix de  vente',
                         hint: 'Veuillez entrer le prix',
-                      ),
-                     /* Container(
-                        width: 330,
-                        child: TextFormField(
-                          controller: date,
-                          style: TextStyle(
-                            fontSize: 15,
-                            height: 0.5,
-                          ),
-                          readOnly: true,
-                          onTap: () async {
-                            DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2022),
-                                lastDate: DateTime.now());
-                            if (pickedDate != null) {
-                              String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                              setState(() {
-                                date.text = DateTime.now() as String;
-                              });
-                            } else {
-                              snackBarWidget(context,
-                                  message: "La date n'est pas selectioné");
-                            }
-                          },
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Date de vente',
-                            hintText: 'Veuillez selectionner la date'
-                          ),
-                        ),
                       ),*/
                       SizedBox(height: 10,),
                       Row(
@@ -243,25 +212,25 @@ class _Save_salesState extends State<Save_sales> {
                                       loading = true;
                                     });
                                     final vente = Vente(
-                                      prixVente: prixVente.text,
-                                      dateVente:DateTime.now() as String,
+                                      prixVente: double.parse(quantity.text)  * widget.prix,
+                                      dateVente:DateTime.now().toString(),
                                       uniteMesure:uniteMesure,
-                                      qty: quantity.text,
+                                      qty: double.parse(quantity.text),
                                     );
                                     final provider = Provider.of<ProviderApi>(context,
                                         listen: false);
                                     provider.addVente(vente: vente);
+                                    provider.UpdateQtyV(quantV: double.parse(quantity.text), qty: widget.quantite, prodId: widget.productId);
                                   } catch (e) {
                                     Fluttertoast.showToast(msg: e.toString());
                                     setState(() {
                                       loading = false;
                                     });
                                   }
-                                 // doc['qty'] = (int.parse(doc['qty']) - int.parse(quantity.text)).toString();
                                   clearFields();
                                   Navigator.pop(context);
                                 }
-                                //Navigator.push(context, MaterialPageRoute(builder: (context)=>DashboardUser()));
+
                               },
                               color: Color(0xFF0C8E36),
                               child: Text('Enregister une vente'),

@@ -5,12 +5,12 @@ Widget dashlistproducts(
     {String? designation,
     String? mg,
     String? categorie,
-    String? prix,
+     String? prix,
     String? nombre,
     }) {
   return Container(
     padding: EdgeInsets.only(left: 12, right: 12, top: 6, bottom: 6),
-    height: 100,
+    height: 110,
     child: Card(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

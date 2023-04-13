@@ -28,5 +28,50 @@ class ProviderApi extends ChangeNotifier {
 
   void addVente({required Vente vente}) => FireBaseApi().addVente(vente: vente);
 
-  void approv({required Approvisionement appro}) => FireBaseApi().approv(appro: appro);
+  void approv({required Approvisionement appro}) =>
+      FireBaseApi().approv(appro: appro);
+
+  void UpdateApprov({required Product prod}) =>
+      FireBaseApi().UpdateApprov(prod: prod);
+
+  void UpdatePQuanProd({
+    required String quantity,
+    required String prodId,
+  }) =>
+      FireBaseApi().UpdateQuantProd(
+        prodId: prodId,
+        quantite: quantity,
+      );
+
+  void UpdateDateExpProduit({
+    required String date,
+    required String prodId,
+  }) =>
+      FireBaseApi().UpdateDateExpProd(
+        prodId: prodId,
+        dateExp: date,
+      );
+
+  void UpdatePriceProduit({
+    required String prix,
+    required String prodId,
+  }) =>
+      FireBaseApi().UpdatePrixProd(
+        prodId: prodId,
+        prix: prix,
+      );
+
+  void UpdateQtyV(
+          {required double quantV,
+          required double qty,
+          required String prodId}) =>
+      FireBaseApi()
+          .UpdateQtyAfterVente(quantV: quantV, qty: qty, prodId: prodId);
+
+  void UpdateQtyAp(
+      {required double quantAp,
+        required double qty,
+        required String prodId}) =>
+      FireBaseApi()
+          .UpdateQtyAfterApp(quantAp: quantAp, qty: qty, prodId: prodId);
 }

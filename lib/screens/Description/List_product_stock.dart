@@ -67,17 +67,21 @@ class _ListDeProduitsStockState extends State<ListDeProduitsStock> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => DescriptionProduit(
-                              idProd: produit['prodId'],
-                                dateExp: produit['date d\'expiration'],
-                                nom: produit['name'],
-                                Nombre: produit['qty'],
-                                Prix: produit['price'])));
+                                  idProd: produit['prodId'],
+                                  dateExp: produit['date d\'expiration'],
+                                  nom: produit['name'],
+                                  Nombre: produit['qty'],
+                                  Prix: produit['price'],
+                                  uniteMesure: produit['uniteMesure'],
+                                  category: produit['categorie'],
+                                  formePharm: produit['formePharm'],
+                                )));
                   },
                   child: dashlistproducts(
                     designation: produit['name'],
-                    nombre: produit['qty'],
+                    nombre: "${produit['qty']}",
                     mg: produit['date d\'expiration'],
-                    prix: produit['price'],
+                    prix: "${produit['price']}",
                   ),
                 );
               });

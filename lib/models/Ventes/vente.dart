@@ -1,8 +1,8 @@
 class Vente{
   String? prodId;
   final String dateVente;
-  final String qty;
-  final prixVente;
+  final double qty;
+  final double prixVente;
   final String uniteMesure;
 
   Vente({required this.dateVente, required this.uniteMesure, required this.qty,required this.prixVente});

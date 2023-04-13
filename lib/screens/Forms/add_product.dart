@@ -235,11 +235,11 @@ class _AddProductsState extends State<AddProducts> {
               });
               final prod = Product(
                 name:name.text,
-                category: category.text,
-                qty: quantity.text,
-                dateExp: dateExp.text,
+                categorie: category.text,
+                qty: quantity.text as double,
+                dateExp: dateExp.toString(),
                 formePharm: formePharm.text,
-                prix: prix.text,
+                prix: prix.text as double,
                 uniteMesure: uniteMesure
               );
               final provider = Provider.of<ProviderApi>(context,

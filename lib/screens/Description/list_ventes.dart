@@ -1,39 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/Tiles/tile_liste_product.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
-class ListDeProduitsAppov extends StatefulWidget {
-  const ListDeProduitsAppov({Key? key}) : super(key: key);
+class ListRapportVente extends StatefulWidget {
+  const ListRapportVente({Key? key}) : super(key: key);
 
   @override
-  State<ListDeProduitsAppov> createState() => _ListDeProduitsAppovState();
+  State<ListRapportVente> createState() => _ListRapportVenteState();
 }
 
-class _ListDeProduitsAppovState extends State<ListDeProduitsAppov> {
+class _ListRapportVenteState extends State<ListRapportVente> {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Liste des produits'),
-        backgroundColor: Color(0xFF0C8E36),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(context: context, delegate: MySearch());
-            },
-            icon: Icon(Icons.search),
-          ),
-        ],
-      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('Pony')
             .doc('Gallia')
-            .collection('Produits')
+            .collection('Ventes')
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.none) {
@@ -53,43 +40,32 @@ class _ListDeProduitsAppovState extends State<ListDeProduitsAppov> {
           if (!snapshot.hasData) {
             return Material(
               child: Center(
-                child: Text('Aucun produit existant'),
+                child: Text('Aucun vente existant'),
               ),
             );
           }
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
-                DocumentSnapshot produit = snapshot.data!.docs[index];
+                DocumentSnapshot vente = snapshot.data!.docs[index];
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
+                    /*Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ApprovisionementPage(
-                              productId: produit['prodId'],
-                              nom: produit['name'],
-                              quantity: produit['qty'],
-                            )));
+                              productId: vente['prodId'],
+                            )));*/
                   },
                   child: dashlistproducts(
-                    designation: produit['name'],
-                    nombre: "${produit['qty']}",
-                    mg: produit['date d\'expiration'],
-                    prix: "${produit['price']}",
+                    designation: vente['name'],
+                    nombre: "${vente['qty']}",
+                    mg: vente['dateVente'],
+                    prix: "${vente['prixVente']}",
                   ),
                 );
               });
         },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddProducts()));
-        },
-        icon: Icon(Icons.add),
-        label: Text('Ajouter un produit'),
-        backgroundColor: Color(0xFF0C8E36),
       ),
     );
   }
