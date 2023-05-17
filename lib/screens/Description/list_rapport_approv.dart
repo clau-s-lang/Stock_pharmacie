@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stock_pharma/widgets/Tiles/tile_liste_product.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
@@ -20,7 +21,7 @@ class _ListRapportApproState extends State<ListRapportAppro> {
         stream: FirebaseFirestore.instance
             .collection('Pony')
             .doc('Gallia')
-            .collection('Approvisionnement')
+            .collection('Approvisionement')
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.none) {
@@ -48,21 +49,13 @@ class _ListRapportApproState extends State<ListRapportAppro> {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot approv = snapshot.data!.docs[index];
-                return GestureDetector(
-                  onTap: () {
-                    /*Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ApprovisionementPage(
-                              productId: approv['prodId'],
-                            )));*/
-                  },
-                  child: dashlistproducts(
+                String formattedDate =
+                DateFormat('dd MMMM yyyy').format(approv['dateExp'].toDate()).toString();
+                return dashlistproducts(
                     designation: approv['name'],
-                    nombre: approv['qty'],
-                    mg: approv['date d\'expiration'],
-                    prix: approv['price'],
-                  ),
+                    nombre:  "${approv['qty']}",
+                    mg: formattedDate,
+                    prix: "${approv['prixAchat']}",
                 );
               });
         },

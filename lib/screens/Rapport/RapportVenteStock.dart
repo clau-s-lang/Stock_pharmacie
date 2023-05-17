@@ -60,6 +60,7 @@ class _RapportVenteStockState extends State<RapportVenteStock>
         children: [
           ListRapportVente(),
           ListRapportAppro(),
+          ListRapportStock(),
         ],
       ),
     );

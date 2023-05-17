@@ -4,7 +4,7 @@ class Approvisionement{
   final String nom;
   final double prixAchat; //payé ou non payé
   final double qty;
-  final String dateExp;
+  final DateTime dateExp;
   final String typePaiement; //payé ou non payé
   final String fournisseur;
 

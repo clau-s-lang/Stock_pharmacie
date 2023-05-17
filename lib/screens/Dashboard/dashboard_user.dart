@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:stock_pharma/provider/provider/apiProvider.dart';
 import 'package:stock_pharma/screens/Dashboard/dashboard_product.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
@@ -128,11 +130,53 @@ class _DashboardUserState extends State<DashboardUser> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  dashUserTile(
-                    text: 'Profil',
+                  GestureDetector(
+                    onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ListDeProduitsStock(),
+                    ));},
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      width: 180,
+                      height: 155,
+                      child: Card(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 100,
+                              //width: 50,
+                              child: Image(
+                                image: AssetImage('images/medoc.png'),
+                              ),
+                            ),
+                            Container(height:20,child: Center(child: Text('Stock'))),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                  dashUserTile(
-                    text: 'Deconnexion',
+                  GestureDetector(
+                    onTap: (){
+                      final provider = Provider.of<ProviderApi>(context, listen: false);
+                      provider.logOut();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      width: 180,
+                      height: 155,
+                      child: Card(
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 100,
+                              //width: 50,
+                              child: Image(
+                                image: AssetImage('images/medoc.png'),
+                              ),
+                            ),
+                            Container(height:20,child: Center(child: Text('Deconnexion'))),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

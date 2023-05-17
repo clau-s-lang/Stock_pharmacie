@@ -67,6 +67,7 @@ class _ListDeProduitsState extends State<ListDeProduits> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => Save_sales(
+                              name: produit['name'],
                               productId: produit['prodId'],
                               quantite: double.parse(produit['qty'].toString()),
                               prix: double.parse(produit['price'].toString()),

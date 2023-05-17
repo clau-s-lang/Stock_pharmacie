@@ -237,7 +237,7 @@ class _AddProductsState extends State<AddProducts> {
                 name:name.text,
                 categorie: category.text,
                 qty: quantity.text as double,
-                dateExp: dateExp.toString(),
+                dateExp: DateTime.parse(dateExp.toString()),
                 formePharm: formePharm.text,
                 prix: prix.text as double,
                 uniteMesure: uniteMesure

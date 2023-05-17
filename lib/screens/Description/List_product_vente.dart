@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/Tiles/tile_liste_product.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
@@ -61,6 +62,8 @@ class _ListDeProduitsVenteState extends State<ListDeProduitsVente> {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot produit = snapshot.data!.docs[index];
+                String formattedDate =
+                DateFormat('dd MMMM yyyy').format(produit['date d\'expiration'].toDate()).toString();
                 return GestureDetector(
                   onTap: () {
                    Navigator.push(
@@ -68,6 +71,7 @@ class _ListDeProduitsVenteState extends State<ListDeProduitsVente> {
                         MaterialPageRoute(
                             builder: (context) => Save_sales(
                                   productId: produit['prodId'],
+                              name: produit['name'],
                               quantite: double.parse(produit['qty'].toString()),
                               prix: double.parse(produit['price'].toString()),
                                 )));
@@ -75,7 +79,7 @@ class _ListDeProduitsVenteState extends State<ListDeProduitsVente> {
                   child: dashlistproducts(
                     designation: produit['name'],
                     nombre: "${produit['qty']}",
-                    mg: produit['date d\'expiration'],
+                    mg: formattedDate,
                     prix: "${produit['price']}",
                   ),
                 );

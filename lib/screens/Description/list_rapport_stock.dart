@@ -6,30 +6,18 @@ import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/Tiles/tile_liste_product.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
-class ListDeProduitsAppov extends StatefulWidget {
-  const ListDeProduitsAppov({Key? key}) : super(key: key);
+class ListRapportStock extends StatefulWidget {
+  const ListRapportStock({Key? key}) : super(key: key);
 
   @override
-  State<ListDeProduitsAppov> createState() => _ListDeProduitsAppovState();
+  State<ListRapportStock> createState() => _ListRapportStockState();
 }
 
-class _ListDeProduitsAppovState extends State<ListDeProduitsAppov> {
+class _ListRapportStockState extends State<ListRapportStock> {
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Liste des produits'),
-        backgroundColor: Color(0xFF0C8E36),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(context: context, delegate: MySearch());
-            },
-            icon: Icon(Icons.search),
-          ),
-        ],
-      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('Pony')
@@ -69,10 +57,15 @@ class _ListDeProduitsAppovState extends State<ListDeProduitsAppov> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => ApprovisionementPage(
-                              productId: produit['prodId'],
+                            builder: (context) => DescriptionProduit(
+                              idProd: produit['prodId'],
+                              dateExp: produit['date d\'expiration'],
                               nom: produit['name'],
-                              quantity: produit['qty'],
+                              Nombre: double.parse(produit['qty'].toString()),
+                              Prix: double.parse(produit['price'].toString()),
+                              uniteMesure: produit['uniteMesure'],
+                              category: produit['categorie'],
+                              formePharm: produit['formePharm'],
                             )));
                   },
                   child: dashlistproducts(
@@ -85,17 +78,7 @@ class _ListDeProduitsAppovState extends State<ListDeProduitsAppov> {
               });
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddProducts()));
-        },
-        icon: Icon(Icons.add),
-        label: Text('Ajouter un produit'),
-        backgroundColor: Color(0xFF0C8E36),
-      ),
+
     );
   }
 }
-
-

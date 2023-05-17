@@ -14,8 +14,9 @@ class Save_sales extends StatefulWidget {
   final String productId;
   final double quantite;
   final double prix;
+  final String name;
 
-  Save_sales({Key? key, required this.productId, required this.quantite, required this.prix}) : super(key: key);
+  Save_sales({Key? key, required this.name,required this.productId, required this.quantite, required this.prix}) : super(key: key);
 
   @override
   State<Save_sales> createState() => _Save_salesState();
@@ -212,8 +213,8 @@ class _Save_salesState extends State<Save_sales> {
                                       loading = true;
                                     });
                                     final vente = Vente(
+                                      name: widget.name,
                                       prixVente: double.parse(quantity.text)  * widget.prix,
-                                      dateVente:DateTime.now().toString(),
                                       uniteMesure:uniteMesure,
                                       qty: double.parse(quantity.text),
                                     );

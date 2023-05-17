@@ -17,3 +17,4 @@ export 'Dash/iconeOption.dart';
 export 'Dash/detailNewBulletin.dart';
 export 'Buttons/material_button.dart';
 export 'Snackbar/snackbar_widget.dart';
+export 'Tiles/tile_produit_sold.dart';

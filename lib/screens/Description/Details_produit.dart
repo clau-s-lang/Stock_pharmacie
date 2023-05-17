@@ -6,8 +6,8 @@ class DescriptionProduit extends StatefulWidget {
   final String idProd;
   final String nom;
   final String dateExp;
-  final String Prix;
-  final String Nombre;
+  final double Prix;
+  final double Nombre;
   final String uniteMesure;
   final String category;
   final String formePharm;
@@ -106,7 +106,7 @@ class _DescriptionProduitState extends State<DescriptionProduit> {
                                 Text('Quantité disponible'),
                                 SizedBox(height: 5),
                                 Text(
-                                  widget.Nombre,
+                                  widget.Nombre.toString(),
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.bold),
@@ -124,12 +124,12 @@ class _DescriptionProduitState extends State<DescriptionProduit> {
                                             ModifierProduitNombre(
                                               idProd: widget.idProd,
                                               nom: widget.nom,
-                                              qty: widget.Nombre,
+                                              qty: widget.Nombre.toString(),
                                               uniteMesure: widget.uniteMesure,
                                               category: widget.category,
                                               formePharm: widget.formePharm,
                                               dateExp: widget.dateExp,
-                                              prix: widget.Prix,
+                                              prix: widget.Prix.toString(),
                                             )));
                               },
                               icon: Icon(
@@ -156,7 +156,7 @@ class _DescriptionProduitState extends State<DescriptionProduit> {
                                 Text('Prix unitaire'),
                                 SizedBox(height: 5),
                                 Text(
-                                  widget.Prix,
+                                  widget.Prix.toString(),
                                   style: TextStyle(
                                       fontSize: 17,
                                       fontWeight: FontWeight.bold),
@@ -174,12 +174,12 @@ class _DescriptionProduitState extends State<DescriptionProduit> {
                                             ModifierProduitPrix(
                                               idProd: widget.idProd,
                                               nom: widget.nom,
-                                              qty: widget.Nombre,
+                                              qty: widget.Nombre.toString(),
                                               uniteMesure: widget.uniteMesure,
                                               category: widget.category,
                                               formePharm: widget.formePharm,
                                               dateExp: widget.dateExp,
-                                              prix: widget.Prix,
+                                              prix: widget.Prix.toString(),
                                             )));
                               },
                               icon: Icon(
@@ -224,12 +224,12 @@ class _DescriptionProduitState extends State<DescriptionProduit> {
                                             ModifierProduitExp(
                                               idProd: widget.idProd,
                                               nom: widget.nom,
-                                              qty: widget.Nombre,
+                                              qty: widget.Nombre.toString(),
                                               uniteMesure: widget.uniteMesure,
                                               category: widget.category,
                                               formePharm: widget.formePharm,
                                               dateExp: widget.dateExp,
-                                              prix: widget.Prix,
+                                              prix: widget.Prix.toString(),
                                             )));
                               },
                               icon: Icon(

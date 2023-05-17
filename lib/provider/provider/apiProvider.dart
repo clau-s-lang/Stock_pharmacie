@@ -71,7 +71,8 @@ class ProviderApi extends ChangeNotifier {
   void UpdateQtyAp(
       {required double quantAp,
         required double qty,
-        required String prodId}) =>
+        required String prodId,
+      required DateTime dateExp}) =>
       FireBaseApi()
-          .UpdateQtyAfterApp(quantAp: quantAp, qty: qty, prodId: prodId);
+          .UpdateQtyAfterApp(quantAp: quantAp, qty: qty, prodId: prodId, dateExp: dateExp);
 }

@@ -118,12 +118,12 @@ class _ApprovisionementPageState extends State<ApprovisionementPage> {
                 qty: double.parse(quantity.text),
                 fournisseur: fournisseur.text,
                 typePaiement: typePaiement.text,
-                dateExp: dateExpiration.text,
+                dateExp: DateTime.parse(dateExpiration.text),
               );
               final provider = Provider.of<ProviderApi>(context,
                   listen: false);
               provider.approv(appro: appro);
-              provider.UpdateQtyAp(quantAp: double.parse(quantity.text), qty: widget.quantity, prodId: widget.productId);
+              provider.UpdateQtyAp(quantAp: double.parse(quantity.text), qty: widget.quantity, prodId: widget.productId, dateExp: DateTime.parse(dateExpiration.text));
             } catch (e) {
               Fluttertoast.showToast(msg: e.toString());
               setState(() {

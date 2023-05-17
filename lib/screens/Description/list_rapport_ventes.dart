@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stock_pharma/widgets/Tiles/tile_liste_product.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
@@ -48,6 +49,8 @@ class _ListRapportVenteState extends State<ListRapportVente> {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot vente = snapshot.data!.docs[index];
+                String formattedDate =
+                DateFormat('dd MMMM yyyy').format(vente['dateVente'].toDate()).toString();
                 return GestureDetector(
                   onTap: () {
                     /*Navigator.push(
@@ -57,10 +60,10 @@ class _ListRapportVenteState extends State<ListRapportVente> {
                               productId: vente['prodId'],
                             )));*/
                   },
-                  child: dashlistproducts(
-                    designation: vente['name'],
+                  child: dashlistproductsSold(
+                    designation: vente['designation'],
                     nombre: "${vente['qty']}",
-                    mg: vente['dateVente'],
+                    mg: formattedDate,
                     prix: "${vente['prixVente']}",
                   ),
                 );

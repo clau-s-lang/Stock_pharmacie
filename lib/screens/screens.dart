@@ -22,5 +22,6 @@ export 'Forms/modification_prod_qty.dart';
 export 'Description/list_rapport_approv.dart';
 export 'Forms/modification_prod_prixUnitaire.dart';
 export 'Forms/modification_prod_DateExp.dart';
-export 'Description/list_ventes.dart';
+export 'Description/list_rapport_ventes.dart';
 export 'Description/list_rapport_produit.dart';
+export 'Description/list_rapport_stock.dart';

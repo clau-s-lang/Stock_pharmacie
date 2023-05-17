@@ -4,7 +4,7 @@ class Product{
   final String uniteMesure;
   final String categorie;
   final double qty;
-  final String dateExp;
+  final DateTime dateExp;
   final String formePharm;
   final double prix;
 

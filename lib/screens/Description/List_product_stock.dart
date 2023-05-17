@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/Tiles/tile_liste_product.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
@@ -61,6 +62,8 @@ class _ListDeProduitsStockState extends State<ListDeProduitsStock> {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot produit = snapshot.data!.docs[index];
+                String formattedDate =
+                DateFormat('dd MMMM yyyy').format(produit['date d\'expiration'].toDate()).toString();
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -70,8 +73,8 @@ class _ListDeProduitsStockState extends State<ListDeProduitsStock> {
                                   idProd: produit['prodId'],
                                   dateExp: produit['date d\'expiration'],
                                   nom: produit['name'],
-                                  Nombre: produit['qty'],
-                                  Prix: produit['price'],
+                                  Nombre: double.parse(produit['qty'].toString()),
+                                  Prix: double.parse(produit['price'].toString()),
                                   uniteMesure: produit['uniteMesure'],
                                   category: produit['categorie'],
                                   formePharm: produit['formePharm'],
@@ -80,7 +83,7 @@ class _ListDeProduitsStockState extends State<ListDeProduitsStock> {
                   child: dashlistproducts(
                     designation: produit['name'],
                     nombre: "${produit['qty']}",
-                    mg: produit['date d\'expiration'],
+                    mg: formattedDate,
                     prix: "${produit['price']}",
                   ),
                 );

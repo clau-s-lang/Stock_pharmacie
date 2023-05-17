@@ -228,7 +228,7 @@ class FireBaseApi extends ChangeNotifier {
   }
 
   Future UpdateQtyAfterApp(
-      {required double quantAp, required double qty, required String prodId}) async {
+      {required double quantAp, required double qty, required String prodId, required DateTime dateExp}) async {
     try {
       await FirebaseFirestore.instance
           .collection('Pony')
@@ -237,6 +237,7 @@ class FireBaseApi extends ChangeNotifier {
           .doc(prodId)
           .set({
         'qty': qty + quantAp,
+        'date d\'expiration': dateExp,
       }, SetOptions(merge: true)).whenComplete(() {});
     } on FirebaseException catch (e) {
       print(e);
