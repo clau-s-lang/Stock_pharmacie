@@ -15,8 +15,8 @@ class FireBaseApi extends ChangeNotifier {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      final user = userCredential.user;
-      print(user?.uid);
+      //final user = userCredential.user;
+      //print(user?.uid);
       toFirestore(userCredential.user, employee);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

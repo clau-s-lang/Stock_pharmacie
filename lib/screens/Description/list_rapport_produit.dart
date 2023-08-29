@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/Tiles/tile_liste_product.dart';
@@ -15,7 +14,7 @@ class ListDeProduits extends StatefulWidget {
 class _ListDeProduitsState extends State<ListDeProduits> {
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
+    //User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         title: Text('Liste des produits'),
@@ -70,14 +69,19 @@ class _ListDeProduitsState extends State<ListDeProduits> {
                               name: produit['name'],
                               productId: produit['prodId'],
                               quantite: double.parse(produit['qty'].toString()),
-                              prix: double.parse(produit['price'].toString()),
+                              prixComp: double.parse(produit['priceComp'].toString()),
+                              prixBoite: double.parse(produit['priceBoite'].toString()),
+                              prixPlaq: double.parse(produit['pricePlaquette'].toString()),
+                              prixFlac: double.parse(produit['priceFlacon'].toString()),
                             )));
                   },
-                  child: dashlistproducts(
+                  child: dashListProduct(
                     designation: produit['name'],
                     nombre: "${produit['qty']}",
-                    mg: produit['date d\'expiration'],
+                    dateExp: produit['date d\'expiration'],
                     prix: "${produit['price']}",
+                    alertColor: DateTime.now().difference(produit['date d\'expiration'].toDate()).inDays <= 90 ? Colors.red : Colors.black,
+
                   ),
                 );
               });

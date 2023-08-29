@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
 class VenteJournalier extends StatefulWidget {

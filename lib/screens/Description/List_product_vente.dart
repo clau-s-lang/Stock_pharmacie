@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stock_pharma/screens/screens.dart';
@@ -16,7 +15,7 @@ class ListDeProduitsVente extends StatefulWidget {
 class _ListDeProduitsVenteState extends State<ListDeProduitsVente> {
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
+    //User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         title: Text('Liste des produits'),
@@ -63,7 +62,7 @@ class _ListDeProduitsVenteState extends State<ListDeProduitsVente> {
               itemBuilder: (context, index) {
                 DocumentSnapshot produit = snapshot.data!.docs[index];
                 String formattedDate =
-                DateFormat('dd MMMM yyyy').format(produit['date d\'expiration'].toDate()).toString();
+                DateFormat('dd-MM-yyyy').format(produit['date d\'expiration'].toDate()).toString();
                 return GestureDetector(
                   onTap: () {
                    Navigator.push(
@@ -73,14 +72,19 @@ class _ListDeProduitsVenteState extends State<ListDeProduitsVente> {
                                   productId: produit['prodId'],
                               name: produit['name'],
                               quantite: double.parse(produit['qty'].toString()),
-                              prix: double.parse(produit['price'].toString()),
+                              prixComp: double.parse(produit['priceComp'].toString()),
+                              prixBoite: double.parse(produit['priceBoite'].toString()),
+                              prixPlaq: double.parse(produit['pricePlaquette'].toString()),
+                              prixFlac: double.parse(produit['priceFlacon'].toString()),
                                 )));
                   },
-                  child: dashlistproducts(
+                  child: dashListProduct(
                     designation: produit['name'],
                     nombre: "${produit['qty']}",
-                    mg: formattedDate,
+                    dateExp: formattedDate,
                     prix: "${produit['price']}",
+                    alertColor: produit['date d\'expiration'].toDate().difference(DateTime.now()).inDays <= 90 ? Colors.red : Colors.black,
+
                   ),
                 );
               });

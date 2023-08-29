@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stock_pharma/screens/screens.dart';
-import 'package:stock_pharma/widgets/widgets.dart';
 
 class RapportVenteStock extends StatefulWidget {
   const RapportVenteStock({Key? key}) : super(key: key);

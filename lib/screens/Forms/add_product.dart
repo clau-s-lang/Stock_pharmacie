@@ -4,8 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:stock_pharma/models/models.dart';
-import 'package:stock_pharma/screens/Dashboard/edit_product.dart';
-import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 
 import '../../provider/provider/apiProvider.dart';
@@ -27,7 +25,10 @@ class _AddProductsState extends State<AddProducts> {
   final dateExp = TextEditingController();
   final description = TextEditingController();
   final formePharm = TextEditingController();
-  final prix = TextEditingController();
+  final prixComp = TextEditingController();
+  final prixBoite = TextEditingController();
+  final prixFlacon = TextEditingController();
+  final prixPlaq = TextEditingController();
   String uniteMesure = 'Non specifié';
 
   final _formKey =  GlobalKey<FormState>();
@@ -68,7 +69,7 @@ class _AddProductsState extends State<AddProducts> {
                         label: 'Quantité',
                         controller: quantity,
                       ),
-                      Container(
+                     /* Container(
                         child: Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text('Unité de mesure', style: TextStyle(fontSize: 17),),
@@ -100,6 +101,7 @@ class _AddProductsState extends State<AddProducts> {
                         ],
                       ),
                       Row(
+
                         children: [
                           Expanded(
                             flex: 1,
@@ -120,6 +122,16 @@ class _AddProductsState extends State<AddProducts> {
                                 },
                                 activeColor: Colors.green,
                               ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15),
+                            child: employTextField(
+                              width: 180,
+                              height: 50,
+                              controller: quantity,
+                              label: 'Prix Unitaire',
+                              hint: 'Veuillez entrer le PU',
                             ),
                           ),
                         ],
@@ -147,6 +159,16 @@ class _AddProductsState extends State<AddProducts> {
                               ),
                             ),
                           ),
+                          Padding(
+                            padding: EdgeInsets.all(15),
+                            child: employTextField(
+                              width: 180,
+                              height: 50,
+                              controller: quantity,
+                              label: 'Prix Unitaire',
+                              hint: 'Veuillez entrer le PU',
+                            ),
+                          ),
                         ],
                       ),
                       Row(
@@ -172,15 +194,37 @@ class _AddProductsState extends State<AddProducts> {
                               ),
                             ),
                           ),
+                          Padding(
+                            padding: EdgeInsets.all(15),
+                            child: employTextField(
+                              width: 180,
+                              height: 50,
+                              controller: quantity,
+                              label: 'Prix Unitaire',
+                              hint: 'Veuillez entrer le PU',
+                            ),
+                          ),
                         ],
-                      ),
+                      ),*/
                      employTextField(
                        label: 'Forme pharmaceutique',
                        controller: formePharm,
                      ),
                       employTextField(
-                        label: 'Prix de vente',
-                        controller: prix,
+                        label: 'Prix de vente Boite',
+                        controller: prixBoite,
+                      ),
+                      employTextField(
+                        label: 'Prix de vente Comprimé',
+                        controller: prixComp,
+                      ),
+                      employTextField(
+                        label: 'Prix de vente Flacon',
+                        controller: prixFlacon,
+                      ),
+                      employTextField(
+                        label: 'Prix de vente Boite',
+                        controller: prixBoite,
                       ),
                       Container(
                         width: 350,
@@ -239,7 +283,10 @@ class _AddProductsState extends State<AddProducts> {
                 qty: quantity.text as double,
                 dateExp: DateTime.parse(dateExp.toString()),
                 formePharm: formePharm.text,
-                prix: prix.text as double,
+                prixBoite: prixBoite.text as double,
+                prixComp: prixComp.text as double,
+                prixFlac: prixFlacon.text as double,
+                prixPlaq: prixPlaq.text as double,
                 uniteMesure: uniteMesure
               );
               final provider = Provider.of<ProviderApi>(context,

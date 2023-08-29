@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:stock_pharma/screens/screens.dart';
 import 'package:stock_pharma/utils/utils.dart';
 import 'package:stock_pharma/widgets/widgets.dart';
 import '../../provider/provider/apiProvider.dart';

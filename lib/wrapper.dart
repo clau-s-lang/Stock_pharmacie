@@ -17,19 +17,19 @@ class _WrapperState extends State<Wrapper> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
-            return AccountChecker();
+            return const AccountChecker();
           } else if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text(
                 'Veullez reessayer',
               ),
             );
           } else{
-            return SignIn();
+            return const SignIn();
           }
         });
   }

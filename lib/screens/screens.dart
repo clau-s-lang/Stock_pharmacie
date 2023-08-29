@@ -1,6 +1,5 @@
 export 'Forms/sign_up.dart';
 export 'Dashboard/dashboard_user.dart';
-export 'Dashboard/dashboard_user.dart';
 export 'Forms/add_group_product.dart';
 export 'Description/List_product_vente.dart';
 export 'Forms/add_product.dart';
@@ -18,7 +17,6 @@ export 'Description/List_product_approv.dart';
 export 'Description/List_product_stock.dart';
 export 'Forms/modification_prod_qty.dart';
 export 'Description/Details_produit.dart';
-export 'Forms/modification_prod_qty.dart';
 export 'Description/list_rapport_approv.dart';
 export 'Forms/modification_prod_prixUnitaire.dart';
 export 'Forms/modification_prod_DateExp.dart';

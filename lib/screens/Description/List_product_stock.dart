@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stock_pharma/screens/screens.dart';
@@ -16,17 +15,18 @@ class ListDeProduitsStock extends StatefulWidget {
 class _ListDeProduitsStockState extends State<ListDeProduitsStock> {
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
+    //User? user = FirebaseAuth.instance.currentUser;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Liste des produits'),
-        backgroundColor: Color(0xFF0C8E36),
+        title: const Text('Liste des produits'),
+        backgroundColor: const Color(0xFF0C8E36),
         actions: [
           IconButton(
             onPressed: () {
               showSearch(context: context, delegate: MySearch());
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           ),
         ],
       ),
@@ -38,21 +38,21 @@ class _ListDeProduitsStockState extends State<ListDeProduitsStock> {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.none) {
-            return Material(
+            return const Material(
               child: Center(
                 child: Text('Veuillez vous connecter à internet'),
               ),
             );
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Material(
+            return const Material(
               child: Center(
                 child: CircularProgressIndicator(),
               ),
             );
           }
           if (!snapshot.hasData) {
-            return Material(
+            return const Material(
               child: Center(
                 child: Text('Aucun produit existant'),
               ),
@@ -63,7 +63,7 @@ class _ListDeProduitsStockState extends State<ListDeProduitsStock> {
               itemBuilder: (context, index) {
                 DocumentSnapshot produit = snapshot.data!.docs[index];
                 String formattedDate =
-                DateFormat('dd MMMM yyyy').format(produit['date d\'expiration'].toDate()).toString();
+                DateFormat('dd-MM-yyyy').format(produit['date d\'expiration'].toDate()).toString();
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -71,7 +71,7 @@ class _ListDeProduitsStockState extends State<ListDeProduitsStock> {
                         MaterialPageRoute(
                             builder: (context) => DescriptionProduit(
                                   idProd: produit['prodId'],
-                                  dateExp: produit['date d\'expiration'],
+                                  dateExp: formattedDate,
                                   nom: produit['name'],
                                   Nombre: double.parse(produit['qty'].toString()),
                                   Prix: double.parse(produit['price'].toString()),
@@ -80,11 +80,13 @@ class _ListDeProduitsStockState extends State<ListDeProduitsStock> {
                                   formePharm: produit['formePharm'],
                                 )));
                   },
-                  child: dashlistproducts(
+                  child: dashListProduct(
                     designation: produit['name'],
                     nombre: "${produit['qty']}",
-                    mg: formattedDate,
+                    dateExp: formattedDate,
                     prix: "${produit['price']}",
+                    alertColor: produit['date d\'expiration'].toDate().difference(DateTime.now()).inDays <= 90 ? Colors.red : Colors.black,
+
                   ),
                 );
               });
@@ -93,11 +95,11 @@ class _ListDeProduitsStockState extends State<ListDeProduitsStock> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddProducts()));
+              context, MaterialPageRoute(builder: (context) => const AddProducts()));
         },
-        icon: Icon(Icons.add),
-        label: Text('Ajouter un produit'),
-        backgroundColor: Color(0xFF0C8E36),
+        icon: const Icon(Icons.add),
+        label: const Text('Ajouter un produit'),
+        backgroundColor: const Color(0xFF0C8E36),
       ),
     );
   }

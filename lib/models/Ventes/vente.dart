@@ -4,7 +4,7 @@ class Vente{
   String? prodId;
   final String name;
   final double qty;
-  final double prixVente;
+  final double? prixVente;
   final String uniteMesure;
 
   Vente({required this.name, required this.uniteMesure, required this.qty,required this.prixVente});

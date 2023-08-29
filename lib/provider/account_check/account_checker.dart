@@ -14,11 +14,11 @@ class AccountChecker extends StatefulWidget {
 }
 
 class _AccountCheckerState extends State<AccountChecker> {
-  late User _user;
+  //late User _user;
   FirebaseAuth auth  = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    _user = FirebaseAuth.instance.currentUser!;
+    //_user = FirebaseAuth.instance.currentUser!;
 
     return FutureBuilder<DocumentSnapshot>(
         future:

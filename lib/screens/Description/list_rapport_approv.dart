@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stock_pharma/widgets/Tiles/tile_liste_product.dart';
@@ -15,7 +14,7 @@ class ListRapportAppro extends StatefulWidget {
 class _ListRapportApproState extends State<ListRapportAppro> {
   @override
   Widget build(BuildContext context) {
-    User? user = FirebaseAuth.instance.currentUser;
+    //User? user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
@@ -50,12 +49,13 @@ class _ListRapportApproState extends State<ListRapportAppro> {
               itemBuilder: (context, index) {
                 DocumentSnapshot approv = snapshot.data!.docs[index];
                 String formattedDate =
-                DateFormat('dd MMMM yyyy').format(approv['dateExp'].toDate()).toString();
-                return dashlistproducts(
+                DateFormat('dd-MM-yyyy').format(approv['dateExp'].toDate()).toString();
+                return dashListProduct(
                     designation: approv['name'],
                     nombre:  "${approv['qty']}",
-                    mg: formattedDate,
+                    dateExp: formattedDate,
                     prix: "${approv['prixAchat']}",
+                  alertColor: Colors.black,
                 );
               });
         },
