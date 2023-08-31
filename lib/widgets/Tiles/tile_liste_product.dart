@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-Widget dashListProduct({
+StatelessWidget dashListProduct({
   String? designation,
   String? dateExp,
   DateTime? today,
   String? categorie,
-  String? prix,
+  String? priceBoite,
+  String? priceComp,
+  String? pricePlaquette,
+  String? priceFlacon,
   String? nombre,
   required Color? alertColor,
 }) {
@@ -44,11 +47,11 @@ Widget dashListProduct({
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+            padding: EdgeInsets.only(left: 16, right: 20, top: 10, bottom: 10),
             child: Column(
               children: [
                 Text(
-                  '$prix' + ' ' + 'Fc',
+                  'Prix de BT : ' '$priceBoite' + ' ' + 'Fc',
                   style: TextStyle(fontSize: 15),
                 ),
                 SizedBox(

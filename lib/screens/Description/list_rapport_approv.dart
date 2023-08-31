@@ -54,7 +54,7 @@ class _ListRapportApproState extends State<ListRapportAppro> {
                     designation: approv['name'],
                     nombre:  "${approv['qty']}",
                     dateExp: formattedDate,
-                    prix: "${approv['prixAchat']}",
+                  priceBoite: "${approv['priceBoite']}",
                   alertColor: Colors.black,
                 );
               });

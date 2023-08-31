@@ -82,7 +82,7 @@ class _ListDeProduitsVenteState extends State<ListDeProduitsVente> {
                     designation: produit['name'],
                     nombre: "${produit['qty']}",
                     dateExp: formattedDate,
-                    prix: "${produit['price']}",
+                    priceBoite: "${produit['priceBoite']}",
                     alertColor: produit['date d\'expiration'].toDate().difference(DateTime.now()).inDays <= 90 ? Colors.red : Colors.black,
 
                   ),

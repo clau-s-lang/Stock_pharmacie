@@ -78,7 +78,7 @@ class _ListDeProduitsAppovState extends State<ListDeProduitsAppov> {
                     designation: produit['name'],
                     nombre: "${produit['qty']}",
                     dateExp: formattedDate,
-                    prix: "${produit['price']}",
+                    priceComp: "${produit['priceBoite']}",
                     alertColor: produit['date d\'expiration'].toDate().difference(DateTime.now()).inDays <= 90 ? Colors.red : Colors.black,
 
                   ),

@@ -1,5 +1,4 @@
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +36,6 @@ class Save_sales extends StatefulWidget {
 class _Save_salesState extends State<Save_sales> {
   final client = TextEditingController();
   final quantity = TextEditingController();
-  final prixVente = TextEditingController();
   final date = TextEditingController();
   String uniteMesure = 'Non specifié';
   final status = TextEditingController();
@@ -46,22 +44,6 @@ class _Save_salesState extends State<Save_sales> {
   FirebaseAuth auth = FirebaseAuth.instance;
   bool loading = false;
 
-  double? PrixDeVente(uniteMesure){
-    if (uniteMesure == 'Boite'){
-      prixVente == double.parse(quantity.text) *
-          widget.prixBoite;
-    }else if(uniteMesure == 'Flacon'){
-      prixVente== double.parse(quantity.text) *
-          widget.prixFlac;
-    }else if(uniteMesure == 'Plaquette'){
-      prixVente== double.parse(quantity.text) *
-          widget.prixPlaq;
-    }else if(uniteMesure == 'Comprime'){
-      prixVente== double.parse(quantity.text) *
-          widget.prixComp;
-    };
-    return double.parse(prixVente.text);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -273,13 +255,27 @@ class _Save_salesState extends State<Save_sales> {
                                       setState(() {
                                         loading = true;
                                       });
+                                   double coutTotal =0;
+
+                                        if (uniteMesure == 'Boite'){
+                                          coutTotal = double.parse(quantity.text) *
+                                              widget.prixBoite;
+                                        }else if(uniteMesure == 'Flacon'){
+                                          coutTotal = double.parse(quantity.text) *
+                                              widget.prixFlac;
+                                        }else if(uniteMesure == 'Plaquette'){
+                                          coutTotal = double.parse(quantity.text) *
+                                              widget.prixPlaq;
+                                        }else if(uniteMesure == 'Comprime'){
+                                          coutTotal = double.parse(quantity.text) *
+                                              widget.prixComp;
+                                        };
 
 
                                       final vente = Vente(
                                         name: widget.name,
                                         uniteMesure: uniteMesure,
-                                        prixVente: PrixDeVente(uniteMesure),
-
+                                        prixVente: coutTotal,
                                         qty: double.parse(quantity.text),
                                       );
 
@@ -322,7 +318,6 @@ class _Save_salesState extends State<Save_sales> {
   void clearFields() {
     client.clear();
     quantity.clear();
-    prixVente.clear();
     date.clear();
     status.clear();
   }
